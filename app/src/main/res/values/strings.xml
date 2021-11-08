@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">min</string>
+
+    <!--nonce for activity_memorize_words.xml-->
+    <string name="sample_word_for_counting">1/10</string>
+    <string name="sample_word_for_problem">Hello</string>
+    <string name="sample_word_for_solution_1">solution1</string>
+    <string name="sample_word_for_solution_2">solution2</string>
+    <string name="sample_word_for_solution_3">solution3</string>
+    <string name="sample_word_for_solution_4">solution4</string>
+    <!--end-->
+
 </resources>
