@@ -3,9 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
-        <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.35572916666666665" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_memorize_words.xml" value="0.25" />
       </map>
     </option>
   </component>
