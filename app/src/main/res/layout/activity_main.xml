@@ -43,7 +43,8 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:text="newDic"></Button>
+                        android:text="newDic"
+                        android:layout_margin="20dp"></Button>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
