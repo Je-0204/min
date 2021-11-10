@@ -47,6 +47,10 @@ public class Loginscreen01Activity extends AppCompatActivity {
     public void signup(View view){
         Toast.makeText(this.getApplicationContext(), "회원가입페이지로 넘어가", Toast.LENGTH_SHORT).show();
         //goto signup screen activity
+        Intent intent=new Intent();
+        ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen01");
+        intent.setComponent(componentName);
+        startActivity(intent);
     }
     public void kakao(View view){
         Toast.makeText(this.getApplicationContext(), "kakao", Toast.LENGTH_SHORT).show();

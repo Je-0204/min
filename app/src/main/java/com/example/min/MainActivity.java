@@ -1,3 +1,4 @@
+//https://junyoung-developer.tistory.com/107
 package com.example.min;
 
 import androidx.appcompat.app.AppCompatActivity;

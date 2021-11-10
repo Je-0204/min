@@ -1,7 +1,15 @@
+//https://h5bak.tistory.com/113
+//http://dailyddubby.blogspot.com/2018/03/11-spinnercombobox-custom.html
+//https://black-jin0427.tistory.com/222 - 스피너 사용법
+//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=friend3515&logNo=178965040 - 스피너 힌트
+//https://stackoverflow.com/questions/37019941/how-to-add-a-hint-in-spinner-in-xml - android spinner hint
+
 package com.example.min;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,5 +57,9 @@ public class signupscreen01 extends AppCompatActivity{
     public void next(View view){
         //signupscreen02로 넘어가는 intent 코드
         Toast.makeText(this.getApplicationContext(), "next", Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent();
+        ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen02");
+        intent.setComponent(componentName);
+        startActivity(intent);
     }
 }

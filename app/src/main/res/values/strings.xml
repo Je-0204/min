@@ -14,4 +14,5 @@
         <item>공무원 단어 암기</item>
         <item>기타</item>
     </string-array>
+    <string name="congratulation">회원가입을\n축하드립니다!</string>
 </resources>
