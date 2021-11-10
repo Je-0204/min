@@ -2,6 +2,8 @@ package com.example.min;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
@@ -30,6 +32,12 @@ public class Loginscreen01Activity extends AppCompatActivity {
         if(username.getText().toString().equals("test") && password.getText().toString().equals("test")){
             //correct password -> goto main screen
             visitDay++;
+
+            Intent intent=new Intent();
+            ComponentName componentName=new ComponentName("com.example.min","com.example.min.MainActivity");
+            intent.setComponent(componentName);
+            intent.putExtra("visitDay",visitDay);
+            startActivity(intent);
 
         }else {
             //wrong password
