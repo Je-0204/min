@@ -34,7 +34,7 @@ public class signupscreen01 extends AppCompatActivity{
         spinnerJob.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             public void onItemSelected(AdapterView<?>  parent, View view, int position, long id) {
                 String selectedJob=parent.getItemAtPosition(position).toString();
-                Toast.makeText(signupscreen01.this,selectedJob,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(signupscreen01.this,selectedJob,Toast.LENGTH_SHORT).show();
             }
             public void onNothingSelected(AdapterView<?>  parent) {
             }
@@ -45,7 +45,7 @@ public class signupscreen01 extends AppCompatActivity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedDic=parent.getItemAtPosition(position).toString();
-                Toast.makeText(signupscreen01.this,selectedDic,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(signupscreen01.this,selectedDic,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -56,7 +56,6 @@ public class signupscreen01 extends AppCompatActivity{
     }
     public void next(View view){
         //signupscreen02로 넘어가는 intent 코드
-        Toast.makeText(this.getApplicationContext(), "next", Toast.LENGTH_SHORT).show();
         Intent intent=new Intent();
         ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen02");
         intent.setComponent(componentName);

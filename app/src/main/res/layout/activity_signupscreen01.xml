@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:spinnerMode="dialog"
         android:layout_marginBottom="150dp"></Spinner>
+
     <TextView
         android:id="@+id/textview2"
         android:layout_width="match_parent"
@@ -37,8 +38,7 @@
         android:id="@+id/spinner_dic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/dictionary"
-        android:layout_marginBottom="150dp"></Spinner>
+        android:entries="@array/dictionary"></Spinner>
 
     <Space
         android:layout_width="match_parent"
