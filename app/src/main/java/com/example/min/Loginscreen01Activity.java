@@ -45,7 +45,6 @@ public class Loginscreen01Activity extends AppCompatActivity {
         }
     }
     public void signup(View view){
-        Toast.makeText(this.getApplicationContext(), "회원가입페이지로 넘어가", Toast.LENGTH_SHORT).show();
         //goto signup screen activity
         Intent intent=new Intent();
         ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen01");
@@ -53,15 +52,15 @@ public class Loginscreen01Activity extends AppCompatActivity {
         startActivity(intent);
     }
     public void kakao(View view){
-        Toast.makeText(this.getApplicationContext(), "kakao", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getApplicationContext(), "kakao으로 로그인", Toast.LENGTH_SHORT).show();
         //goto kakao login screen activity
     }
     public void naver(View view){
-        Toast.makeText(this.getApplicationContext(), "naver", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getApplicationContext(), "naver으로 로그인", Toast.LENGTH_SHORT).show();
         //goto naver login screen activity
     }
     public void google(View view){
-        Toast.makeText(this.getApplicationContext(), "google", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getApplicationContext(), "google으로 로그인", Toast.LENGTH_SHORT).show();
         //goto google login screen activity
     }
 }
