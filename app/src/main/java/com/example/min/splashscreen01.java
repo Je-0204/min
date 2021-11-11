@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 public class splashscreen01 extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.SplashTheme);
