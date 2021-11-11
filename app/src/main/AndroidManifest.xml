@@ -10,6 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Min">
         <activity
+            android:name=".splashscreen01"
+            android:label="@string/app_name"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".signupscreen03"
             android:exported="true">
             <intent-filter>
