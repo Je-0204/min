@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Min">
         <activity
+            android:name=".SettingsManageUserPrivacy"
+            android:exported="false" />
+        <activity
             android:name=".SettingsMain"
             android:exported="false" />
         <activity

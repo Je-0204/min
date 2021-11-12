@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+    <!-- simple user profile -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -36,36 +37,129 @@
             android:src="@mipmap/ic_launcher"/>
     </RelativeLayout>
 
+    <!-- go to modify user profile-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="7"
+            android:text="modify user profile"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!--horizontal line-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"/>
+
+    <!--statistics-->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TableRow
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp">
+            <androidx.appcompat.widget.AppCompatTextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="Vocabulary"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="memorized words"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="continues study"/>
+        </TableRow>
+        <TableRow
+            android:layout_marginBottom="10dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="8"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="1045"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="45"/>
+        </TableRow>
+    </TableLayout>
+
+    <!--horizontal line-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/darker_gray"/>
+
+
     <!--advertisement-->
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="new - black cow edition is updated!"/>
 
+    <!-- go to more settings -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.5"
+        android:layout_weight="3"
         android:orientation="vertical"
         android:padding="10dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Modify User Privacy"/>
-        <Button
+            android:text="Manage push notification"/>
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change User Profile"/>
-        <Button
+            android:text="Manage shared vocabulary"/>
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change Theme"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="account withdrawal"/>
+            android:text="Manage Themes"/>
     </LinearLayout>
 </LinearLayout>
+
+<!-- menu bar -->
+
+
