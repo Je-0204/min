@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/message_for_signup"></TextView>
+
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="직업선택"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_margin="10dp"></TextView>
+    <Spinner
+        android:id="@+id/spinner_job"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dialog"
+        android:layout_marginBottom="150dp"></Spinner>
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="단어 암기 목적"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_margin="10dp"></TextView>
+    <Spinner
+        android:id="@+id/spinner_dic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/dictionary"></Spinner>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></Space>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="next >"
+        android:layout_gravity="right"
+        android:onClick="next"></Button>
+
+
+</LinearLayout>
