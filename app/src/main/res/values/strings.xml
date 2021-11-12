@@ -8,6 +8,10 @@
     <string name="sample_word_for_solution_2">solution2</string>
     <string name="sample_word_for_solution_3">solution3</string>
     <string name="sample_word_for_solution_4">solution4</string>
+    <string name="title_activity_example1">example1</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
     <!--end-->
 
     <string name="message_for_signup">* 본 조사는 영어 단어장 추천을 위한 조사입니다.\n 여타 기관에 저장한 개인정보를 제공하지 않습니다.</string>
