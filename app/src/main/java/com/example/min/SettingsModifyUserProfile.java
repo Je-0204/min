@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class SettingsManageUserPrivacy extends AppCompatActivity {
+public class SettingsModifyUserProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_manage_user_privacy);
+        setContentView(R.layout.activity_settings_modify_user_profile);
     }
 }
