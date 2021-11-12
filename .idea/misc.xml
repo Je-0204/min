@@ -6,6 +6,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_settings_manage_user_privacy.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_settings_modify_user_privacy.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_settings_monage_user_privacy.xml" value="0.566804979253112" />
       </map>
     </option>
   </component>
