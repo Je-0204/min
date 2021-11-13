@@ -41,6 +41,7 @@ public class signupscreen01 extends AppCompatActivity{
         });
 
         spinnerDic=findViewById(R.id.spinner_dic);
+        spinnerDic.setPrompt("단어 암기 목적");
         spinnerDic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
