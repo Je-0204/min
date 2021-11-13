@@ -22,9 +22,6 @@ public class Loginscreen01Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginscreen01);
 
-        username=(EditText)findViewById(R.id.login_id);
-        password=(EditText)findViewById(R.id.login_password);
-
         TextView signup=findViewById(R.id.text_signup); //회원가입 textview 밑줄 긋기
         signup.setPaintFlags(signup.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
@@ -50,14 +47,6 @@ public class Loginscreen01Activity extends AppCompatActivity {
         ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen01");
         intent.setComponent(componentName);
         startActivity(intent);
-    }
-    public void kakao(View view){
-        Toast.makeText(this.getApplicationContext(), "kakao으로 로그인", Toast.LENGTH_SHORT).show();
-        //goto kakao login screen activity
-    }
-    public void naver(View view){
-        Toast.makeText(this.getApplicationContext(), "naver으로 로그인", Toast.LENGTH_SHORT).show();
-        //goto naver login screen activity
     }
     public void google(View view){
         Toast.makeText(this.getApplicationContext(), "google으로 로그인", Toast.LENGTH_SHORT).show();
