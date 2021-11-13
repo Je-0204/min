@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.33" />
@@ -13,10 +12,15 @@
         <entry key="app/src/main/res/layout/activity_settings_modify_user_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_monage_user_privacy.xml" value="0.566804979253112" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19791666666666666" />
-=======
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_memorize_words.xml" value="0.25" />
->>>>>>> d4dda1141c566d886c9864454eccde8a2e9b8e0a
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/splash.xml" value="0.14270833333333333" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen01.xml" value="0.25364583333333335" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen02.xml" value="0.25729166666666664" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.253125" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_splashscreen01.xml" value="0.13020833333333334" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/loginscreen01.xml" value="0.159375" />
       </map>
     </option>
   </component>
