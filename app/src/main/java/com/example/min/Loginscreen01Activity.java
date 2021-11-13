@@ -22,8 +22,8 @@ public class Loginscreen01Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginscreen01);
 
-        username=(EditText)findViewById(R.id.login_id);
-        password=(EditText)findViewById(R.id.login_password);
+        /*username=(EditText)findViewById(R.id.login_id);
+        password=(EditText)findViewById(R.id.login_password);*/
 
         TextView signup=findViewById(R.id.text_signup); //회원가입 textview 밑줄 긋기
         signup.setPaintFlags(signup.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
