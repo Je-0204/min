@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/white"></item>
-    <item>
-        <bitmap android:src="@drawable/question" android:gravity="center"></bitmap>
+    <item
+        android:top="100dp"
+        android:bottom="20dp">
+        <bitmap
+            android:src="@drawable/logo"
+            android:gravity="fill_horizontal|top"
+            ></bitmap>
     </item>
 </layer-list>
