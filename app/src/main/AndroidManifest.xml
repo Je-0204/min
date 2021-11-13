@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Min">
         <activity
+            android:name=".SettingsManageSharedVocabulary"
+            android:exported="false" />
+        <activity
             android:name=".SettingsManagePushNotification"
             android:exported="false" />
         <activity
@@ -23,9 +26,9 @@
             android:exported="false" />
         <activity
             android:name=".splashscreen01"
+            android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

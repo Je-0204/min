@@ -55,41 +55,40 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="0dp">
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:text="@string/sample_word_for_solution_1">
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:text="@string/sample_word_for_solution_2">
-            </Button>
+            </androidx.appcompat.widget.AppCompatButton>
         </TableRow>
 
         <TableRow
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="0dp">
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:text="@string/sample_word_for_solution_3">
-            </Button>
-            <Button
+            </androidx.appcompat.widget.AppCompatButton>
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
                 android:text="@string/sample_word_for_solution_4">
-            </Button>
+            </androidx.appcompat.widget.AppCompatButton>
         </TableRow>
-
     </TableLayout>
 </LinearLayout>

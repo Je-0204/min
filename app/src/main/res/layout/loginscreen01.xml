@@ -4,57 +4,77 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp">
-    <EditText
-        android:id="@+id/login_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="아이디 입력"
-        android:layout_marginTop="100dp"></EditText>
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="비밀번호 입력"
-        android:inputType="textPassword"
-        android:layout_marginTop="10dp"></EditText>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그인"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:onClick="login"></Button>
 
-    <Button
+    <!-- logo -->
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Kakao talk 으로 로그인"
-        android:onClick="kakao"></Button>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Naver 으로 로그인"
-        android:onClick="naver"></Button>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="Google 으로 로그인"
-        android:onClick="google"></Button>
+        android:src="@drawable/logo" />
 
-    <TextView
-        android:id="@+id/text_signup"
-        android:layout_width="wrap_content"
+    <!--Sign in without sns-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="회원가입"
-        android:textColor="@color/purple_200"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:onClick="signup"></TextView>
+        android:orientation="vertical"
+        android:padding="10dp">
+        <EditText
+            android:id="@+id/login_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="아이디 입력"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"></EditText>
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="비밀번호 입력"
+            android:inputType="textPassword"
+            android:layout_marginBottom="10dp"></EditText>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그인"
+            android:layout_gravity="end"
+            android:layout_marginBottom="30dp"
+            android:onClick="login"></androidx.appcompat.widget.AppCompatButton>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="or"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Google 으로 로그인"
+            android:onClick="google"></androidx.appcompat.widget.AppCompatButton>
+
+        <TextView
+            android:id="@+id/text_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:textColor="@color/purple_200"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:onClick="signup"></TextView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>

@@ -4,75 +4,103 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이름"
-        android:textStyle="bold"
-        android:textSize="30dp"></TextView>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="이름을 입력해주세요"
-        android:inputType="text"
-        android:layout_margin="10dp"></EditText>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아이디"
-        android:textStyle="bold"
-        android:textSize="30dp"></TextView>
-    <EditText
+    <!-- logo -->
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="아이디를 입력해주세요"
-        android:layout_margin="10dp"></EditText>
+        android:src="@drawable/logo" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호"
-        android:textStyle="bold"
-        android:textSize="30dp"></TextView>
-    <EditText
+    <!-- sign up with no sns -->
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="비밀번호를 입력해주세요"
-        android:layout_margin="10dp"></EditText>
+        android:padding="10dp"
+        android:orientation="vertical">
+        <!--input name-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="이름을 입력해주세요"
+            android:inputType="text"
+            android:textSize="18sp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Kakao talk 으로 회원가입"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:onClick="kakao"></Button>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Naver 으로 회원가입"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:onClick="naver"></Button>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Google 으로 회원가입"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:onClick="google"></Button>
+        <!-- input id-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="아이디를 입력해주세요"
+            android:textSize="18sp"/>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"></Space>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next >"
-        android:layout_gravity="right"
-        android:onClick="next"></Button>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="비밀번호"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="비밀번호를 입력해주세요"
+            android:textSize="18sp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Sign up"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--sign up with google -->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <!--horizontal line-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="or"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@android:color/darker_gray"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Google 으로 회원가입"
+            android:onClick="google"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>
