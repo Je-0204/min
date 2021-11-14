@@ -44,7 +44,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/imgButton_addDic"
+                    android:id="@+id/floatingButton_addDic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -54,11 +54,11 @@
                     android:src="@drawable/add_dic_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/imgButton_editScreen"
+                    android:id="@+id/floatingButton_editScreen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/imgButton_addDic"
-                    android:layout_toLeftOf="@id/imgButton_addDic"
+                    android:layout_alignBottom="@id/floatingButton_addDic"
+                    android:layout_toLeftOf="@id/floatingButton_addDic"
                     android:backgroundTint="#DCDCDC"
                     android:src="@drawable/edit_screen_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
