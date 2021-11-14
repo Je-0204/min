@@ -1,125 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/host"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/host">
-        <LinearLayout
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <RelativeLayout
+                android:id="@+id/tab1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_height="match_parent">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/main1"
-                        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#DCDCDC"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="10dp"
-                        android:background="@color/purple_200">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginRight="10dp"
-                            android:text="username"
-                            android:textSize="30dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center_vertical"></TextView>
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/apple"
-                            android:maxWidth="100dp"
-                            android:maxHeight="100dp"
-                            android:adjustViewBounds="true"></ImageView>
-                    </LinearLayout>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:text="newDic"
-                        android:layout_margin="20dp"></Button>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:gravity="bottom|right">
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/imgButton_editScreen"-->
-<!--                            android:layout_width="70dp"-->
-<!--                            android:layout_height="70dp"-->
-<!--                            android:adjustViewBounds="true"-->
-<!--                            android:scaleType="fitCenter"-->
-<!--                            android:src="@drawable/edit_screen_icon"-->
-<!--                            android:layout_toLeftOf="@id/imgButton_addDic"-->
-<!--                            android:layout_alignParentBottom="true"-->
-<!--                            ></ImageButton>-->
-<!--                        <ImageButton-->
-<!--                            android:id="@+id/imgButton_addDic"-->
-<!--                            android:layout_width="70dp"-->
-<!--                            android:layout_height="70dp"-->
-<!--                            android:adjustViewBounds="true"-->
-<!--                            android:scaleType="fitCenter"-->
-<!--                            android:src="@drawable/add_dic_icon"-->
-<!--                            android:layout_alignParentBottom="true"-->
-<!--                            android:layout_alignParentEnd="true"-->
-<!--                            android:layout_alignParentRight="true"></ImageButton>-->
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/imgButton_editScreen"
-                            android:src="@drawable/edit_screen_icon"
-                            android:background="@color/purple_200"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_toLeftOf="@id/imgButton_addDic"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:backgroundTint="@color/purple_200"
-                            />
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/imgButton_addDic"
-                            android:src="@drawable/add_dic_icon"
-                            android:background="@color/purple_200"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@android:id/tabs"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
-                            android:layout_gravity="end|bottom"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="5dp"
-                            android:backgroundTint="@color/purple_200"
-                            />
-                    </RelativeLayout>
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:text="username"
+                        android:textSize="30dp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:maxWidth="100dp"
+                        android:maxHeight="100dp"
+                        android:src="@drawable/user_profile_icon"></ImageView>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/main2"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/imgButton_addDic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="main2"></TextView>
-                <TextView
-                    android:id="@+id/main3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="main3"></TextView>
-            </FrameLayout>
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:backgroundTint="#DCDCDC"
+                    android:src="@drawable/add_dic_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-            <TabWidget
-                android:id="@android:id/tabs"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/imgButton_editScreen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/imgButton_addDic"
+                    android:layout_toLeftOf="@id/imgButton_addDic"
+                    android:backgroundTint="#DCDCDC"
+                    android:src="@drawable/edit_screen_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+                <!--                        <ImageButton-->
+                <!--                            android:id="@+id/imgButton_editScreen"-->
+                <!--                            android:layout_width="70dp"-->
+                <!--                            android:layout_height="70dp"-->
+                <!--                            android:adjustViewBounds="true"-->
+                <!--                            android:scaleType="fitCenter"-->
+                <!--                            android:src="@drawable/edit_screen_icon"-->
+                <!--                            android:layout_toLeftOf="@id/imgButton_addDic"-->
+                <!--                            android:layout_alignParentBottom="true"-->
+                <!--                            ></ImageButton>-->
+                <!--                        <ImageButton-->
+                <!--                            android:id="@+id/imgButton_addDic"-->
+                <!--                            android:layout_width="70dp"-->
+                <!--                            android:layout_height="70dp"-->
+                <!--                            android:adjustViewBounds="true"-->
+                <!--                            android:scaleType="fitCenter"-->
+                <!--                            android:src="@drawable/add_dic_icon"-->
+                <!--                            android:layout_alignParentBottom="true"-->
+                <!--                            android:layout_alignParentEnd="true"-->
+                <!--                            android:layout_alignParentRight="true"></ImageButton>-->
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tab2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/purple_200"></TabWidget>
-        </LinearLayout>
+                android:text="tab2"
+                android:gravity="center"></TextView>
+            <TextView
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="tab3"
+                android:gravity="center"></TextView>
+        </FrameLayout>
 
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#DCDCDC"></TabWidget>
+    </LinearLayout>
 </TabHost>

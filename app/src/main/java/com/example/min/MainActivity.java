@@ -19,18 +19,18 @@ public class MainActivity extends AppCompatActivity {
 
         TabHost.TabSpec spec= tabHost.newTabSpec("tab1");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.mypage_icon,null));
-        spec.setContent(R.id.main1);
+        spec.setContent(R.id.tab1);
         tabHost.addTab(spec);
 
 
         spec= tabHost.newTabSpec("tab2");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.notice_icon,null));
-        spec.setContent(R.id.main2);
+        spec.setContent(R.id.tab2);
         tabHost.addTab(spec);
 
         spec= tabHost.newTabSpec("tab3");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
-        spec.setContent(R.id.main3);
+        spec.setContent(R.id.tab3);
         tabHost.addTab(spec);
     }
 }
