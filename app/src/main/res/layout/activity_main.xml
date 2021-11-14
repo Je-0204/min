@@ -18,6 +18,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:id="@+id/user_upper_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#DCDCDC"
@@ -42,7 +43,6 @@
                         android:maxHeight="100dp"
                         android:src="@drawable/user_profile_icon"></ImageView>
                 </LinearLayout>
-
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/imgButton_addDic"
                     android:layout_width="wrap_content"
@@ -62,27 +62,8 @@
                     android:backgroundTint="#DCDCDC"
                     android:src="@drawable/edit_screen_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-                <!--                        <ImageButton-->
-                <!--                            android:id="@+id/imgButton_editScreen"-->
-                <!--                            android:layout_width="70dp"-->
-                <!--                            android:layout_height="70dp"-->
-                <!--                            android:adjustViewBounds="true"-->
-                <!--                            android:scaleType="fitCenter"-->
-                <!--                            android:src="@drawable/edit_screen_icon"-->
-                <!--                            android:layout_toLeftOf="@id/imgButton_addDic"-->
-                <!--                            android:layout_alignParentBottom="true"-->
-                <!--                            ></ImageButton>-->
-                <!--                        <ImageButton-->
-                <!--                            android:id="@+id/imgButton_addDic"-->
-                <!--                            android:layout_width="70dp"-->
-                <!--                            android:layout_height="70dp"-->
-                <!--                            android:adjustViewBounds="true"-->
-                <!--                            android:scaleType="fitCenter"-->
-                <!--                            android:src="@drawable/add_dic_icon"-->
-                <!--                            android:layout_alignParentBottom="true"-->
-                <!--                            android:layout_alignParentEnd="true"-->
-                <!--                            android:layout_alignParentRight="true"></ImageButton>-->
             </RelativeLayout>
+
             <TextView
                 android:id="@+id/tab2"
                 android:layout_width="match_parent"
