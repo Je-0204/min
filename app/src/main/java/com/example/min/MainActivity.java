@@ -3,6 +3,7 @@
 //http://sunmo.blogspot.com/2010/10/tabwidget-%EA%B0%81-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%B3%84-%EC%95%A1%ED%8B%B0%EB%B9%84%ED%8B%B0-%EB%B3%B4%EC%97%AC%EC%A3%BC%EA%B8%B0-2.html
 //https://stackoverflow.com/questions/21950587/how-to-use-different-activities-with-tabhost-widget-in-android/21950690
 //https://doraeul.tistory.com/21
+//https://recipes4dev.tistory.com/42 - listView
 package com.example.min;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
+                //Button newBtn=new Button(this);
+
             }
         });
         FloatingActionButton editFab=findViewById(R.id.floatingButton_editScreen);
