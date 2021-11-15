@@ -9,6 +9,8 @@ package com.example.min;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,7 +52,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
                 //Button newBtn=new Button(this);
-
+                Intent intent=new Intent();
+                ComponentName componentName=new ComponentName("com.example.min","com.example.min.ChooseDictionary");
+                intent.setComponent(componentName);
+                startActivity(intent);
             }
         });
         FloatingActionButton editFab=findViewById(R.id.floatingButton_editScreen);
