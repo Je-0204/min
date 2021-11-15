@@ -15,7 +15,7 @@
         android:text="@string/message_for_signup"></TextView>
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/job_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="직업선택"
@@ -33,7 +33,7 @@
         android:autofillHints="직업선택"></Spinner>
 
     <TextView
-        android:id="@+id/textview2"
+        android:id="@+id/purpose_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="단어 암기 목적"
@@ -53,6 +53,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"></Space>
     <Button
+        android:id="@+id/next1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="next >"

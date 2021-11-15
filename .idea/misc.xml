@@ -3,14 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-=======
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen01.xml" value="0.19882246376811594" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen02.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/google_sign.xml" value="0.19882246376811594" />
-        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/loginscreen01.xml" value="0.19882246376811594" />
->>>>>>> 87a5ebe8233e029cc6c6c811273d6bc08762566c
+        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/loginscreen01.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/splash.xml" value="0.14270833333333333" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_memorize_words.xml" value="0.25" />
@@ -23,19 +20,11 @@
         <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_manage_push_notification.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_settings_manage_shared_vocabulary.xml" value="0.190625" />
         <entry key="app/src/main/res/layout/activity_settings_manage_user_privacy.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_modify_user_privacy.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_settings_modify_user_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_monage_user_privacy.xml" value="0.566804979253112" />
-        <entry key="app/src/main/res/layout/activity_signupscreen01.xml" value="0.190625" />
-        <entry key="app/src/main/res/layout/activity_signupscreen02.xml" value="0.190625" />
-        <entry key="app/src/main/res/layout/activity_signupscreen03.xml" value="0.190625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19791666666666666" />
-<<<<<<< HEAD
-        <entry key="app/src/main/res/layout/loginscreen01.xml" value="0.190625" />
-=======
->>>>>>> 87a5ebe8233e029cc6c6c811273d6bc08762566c
       </map>
     </option>
   </component>
