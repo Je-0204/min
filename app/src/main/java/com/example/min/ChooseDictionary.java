@@ -38,6 +38,7 @@ public class ChooseDictionary extends AppCompatActivity {
         Intent intent=new Intent();
         ComponentName componentName=new ComponentName("com.example.min","com.example.min.MainActivity");
         intent.setComponent(componentName);
+        intent.putExtra("addDIc",chooseDic);
         startActivity(intent);
     }
     public void cancel(View view){
@@ -45,6 +46,7 @@ public class ChooseDictionary extends AppCompatActivity {
         Intent intent=new Intent();
         ComponentName componentName=new ComponentName("com.example.min","com.example.min.MainActivity");
         intent.setComponent(componentName);
+        intent.putExtra("addDIc",chooseDic);
         startActivity(intent);
     }
     //라디오 그룹 클릭 리스너
@@ -54,15 +56,19 @@ public class ChooseDictionary extends AppCompatActivity {
          if(i == R.id.radiobtn1){
              editTextForBtn4.setEnabled(false);
             Toast.makeText(ChooseDictionary.this, "나만의 단어장", Toast.LENGTH_SHORT).show();
+            chooseDic=1;
          } else if(i == R.id.radiobtn2){
              editTextForBtn4.setEnabled(false);
             Toast.makeText(ChooseDictionary.this, "min 수능 단어장", Toast.LENGTH_SHORT).show();
+             chooseDic=2;
          }else if(i == R.id.radiobtn3){
              editTextForBtn4.setEnabled(false);
              Toast.makeText(ChooseDictionary.this, "min 토익 단어장", Toast.LENGTH_SHORT).show();
+             chooseDic=3;
          }else if(i == R.id.radiobtn4){
              editTextForBtn4.setEnabled(true);
              Toast.makeText(ChooseDictionary.this, "공유된 단어장", Toast.LENGTH_SHORT).show();
+             chooseDic=4;
          }
      }
     };

@@ -37,22 +37,17 @@ public class signupscreen01 extends AppCompatActivity {
     private Spinner spinnerJob;
     private Spinner spinnerDic;
 
-    Button nextBtn;
-
+    String selectedJob;
+    String selectedDic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signupscreen01);
 
-        nextBtn = findViewById(R.id.next1);
         spinnerJob = findViewById(R.id.spinner_job);
         spinnerDic = findViewById(R.id.spinner_dic);
-        final String[] selectedJob = new String[1];
-        final String[] selectedDic = new String[1];
 
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
                 spinnerJob = findViewById(R.id.spinner_job);
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(signupscreen01.this, R.array.job, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -60,7 +55,7 @@ public class signupscreen01 extends AppCompatActivity {
                 spinnerJob.setPrompt("직업 선택");
                 spinnerJob.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        selectedJob[0] = parent.getItemAtPosition(position).toString();
+                        selectedJob = parent.getItemAtPosition(position).toString();
                         //Toast.makeText(signupscreen01.this,selectedJob,Toast.LENGTH_SHORT).show();
                     }
 
@@ -73,7 +68,7 @@ public class signupscreen01 extends AppCompatActivity {
                 spinnerDic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        selectedDic[0] = parent.getItemAtPosition(position).toString();
+                        selectedDic = parent.getItemAtPosition(position).toString();
                         //Toast.makeText(signupscreen01.this,selectedDic,Toast.LENGTH_SHORT).show();
                     }
 
@@ -81,8 +76,14 @@ public class signupscreen01 extends AppCompatActivity {
                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                     }
-                });
-            }
-        });
+            });
+    }
+    public void next(View view){
+        Intent intent=new Intent();
+        ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen02");
+        intent.setComponent(componentName);
+        intent.putExtra("job",selectedJob);
+        intent.putExtra("dic",selectedDic);
+        startActivity(intent);
     }
 }

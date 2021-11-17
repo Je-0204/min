@@ -38,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
         spec= tabHost.newTabSpec("tab2");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.notice_icon,null));
-        spec.setContent(R.id.tab2);
+        spec.setContent(R.id.tab2); //settingmain
         tabHost.addTab(spec);
 
         spec= tabHost.newTabSpec("tab3");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
-        spec.setContent(R.id.tab3);
+        spec.setContent(R.id.tab3); //공지사항
         tabHost.addTab(spec);
 
         FloatingActionButton addFab=findViewById(R.id.floatingButton_addDic);
@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
                 ComponentName componentName=new ComponentName("com.example.min","com.example.min.ChooseDictionary");
                 intent.setComponent(componentName);
                 startActivity(intent);
+
+                Intent getDicNumIntent=new Intent();
+                int addDicNum=getDicNumIntent.getIntExtra("addDic",-1);
+
             }
         });
         FloatingActionButton editFab=findViewById(R.id.floatingButton_editScreen);
