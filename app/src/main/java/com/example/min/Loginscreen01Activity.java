@@ -63,6 +63,10 @@ public class Loginscreen01Activity extends AppCompatActivity {
                                     finish();
                                 } else { // 로그인 실패
                                     Toast.makeText(Loginscreen01Activity.this, "아이디 혹은 비밀번호가 틀렸습니다.", Toast.LENGTH_SHORT).show();
+                                    EditText editText_ID=findViewById(R.id.login_id);
+                                    EditText editText_PW=findViewById(R.id.login_password);
+                                    editText_ID.setText(null);
+                                    editText_PW.setText(null);
                                 }
                             }
                         });
