@@ -50,6 +50,11 @@ public class signupscreen02 extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btn_register);
 
+        Intent getSignUp01Info=getIntent();
+        String job=getSignUp01Info.getStringExtra("job");
+        String dic=getSignUp01Info.getStringExtra("dic");
+        //Toast.makeText(signupscreen02.this,job+dic,Toast.LENGTH_SHORT).show();
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // 회원가입 처리 시작
