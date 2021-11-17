@@ -39,6 +39,7 @@ public class signupscreen01 extends AppCompatActivity {
 
     String selectedJob;
     String selectedDic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,42 +49,42 @@ public class signupscreen01 extends AppCompatActivity {
         spinnerDic = findViewById(R.id.spinner_dic);
 
 
-                spinnerJob = findViewById(R.id.spinner_job);
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(signupscreen01.this, R.array.job, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerJob.setAdapter(adapter);
-                spinnerJob.setPrompt("직업 선택");
-                spinnerJob.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        selectedJob = parent.getItemAtPosition(position).toString();
-                        //Toast.makeText(signupscreen01.this,selectedJob,Toast.LENGTH_SHORT).show();
-                    }
+        spinnerJob = findViewById(R.id.spinner_job);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(signupscreen01.this, R.array.job, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerJob.setAdapter(adapter);
+        spinnerJob.setPrompt("직업 선택");
+        spinnerJob.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedJob = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(signupscreen01.this,selectedJob,Toast.LENGTH_SHORT).show();
+            }
 
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
-                spinnerDic = findViewById(R.id.spinner_dic);
-                spinnerDic.setPrompt("단어 암기 목적");
-                spinnerDic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        selectedDic = parent.getItemAtPosition(position).toString();
-                        //Toast.makeText(signupscreen01.this,selectedDic,Toast.LENGTH_SHORT).show();
-                    }
+        spinnerDic = findViewById(R.id.spinner_dic);
+        spinnerDic.setPrompt("단어 암기 목적");
+        spinnerDic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedDic = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(signupscreen01.this,selectedDic,Toast.LENGTH_SHORT).show();
+            }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                    }
-            });
+            }
+        });
     }
     public void next(View view){
-        Intent intent=new Intent();
-        ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen02");
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.example.min","com.example.min.signupscreen02");
         intent.setComponent(componentName);
-        intent.putExtra("job",selectedJob);
-        intent.putExtra("dic",selectedDic);
+        intent.putExtra("Job",selectedJob);
+        intent.putExtra("Dic",selectedDic);
         startActivity(intent);
     }
 }

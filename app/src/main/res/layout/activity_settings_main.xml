@@ -17,15 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="UserName"
             android:textSize="30dp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/affiliation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
-            android:text="affiliation"
             android:textSize="20dp"
             android:textStyle="bold" />
 

@@ -37,6 +37,10 @@ public class signupscreen02 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signupscreen02);
 
+        Intent getSignUp01Info = getIntent();
+        String Job = getSignUp01Info.getStringExtra("Job");
+        String Dic = getSignUp01Info.getStringExtra("Dic");
+
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -65,21 +69,26 @@ public class signupscreen02 extends AppCompatActivity {
                                     account.setEmailId(firebaseUser.getEmail());
                                     account.setPassword(strPwd);
                                     account.setName(strName);
+                                    account.setJob(Job);
+                                    account.setDic(Dic);
 
                                     Map<String, Object> user = new HashMap<>();
                                     user.put("ID", account.getEmailId());
                                     user.put("Password", account.getPassword());
                                     user.put("Name", account.getName());
                                     user.put("IDToken", account.getIdToken());
+                                    user.put("Job", account.getJob());
+                                    user.put("Dic", account.getDic());
 
                                     db.collection("UserInfo")
-                                            .add(user)
-                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            .document(account.getIdToken())
+                                            .set(user)
+                                            .addOnSuccessListener(new OnSuccessListener() {
                                                 @Override
-                                                public void onSuccess(DocumentReference documentReference) {
+                                                public void onSuccess(Object o) {
                                                     Toast.makeText(signupscreen02.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
-                                                    Intent intent=new Intent();
-                                                    ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen03");
+                                                    Intent intent = new Intent();
+                                                    ComponentName componentName = new ComponentName("com.example.min","com.example.min.signupscreen03");
                                                     intent.setComponent(componentName);
                                                     startActivity(intent);
                                                 }

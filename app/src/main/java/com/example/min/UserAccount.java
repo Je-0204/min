@@ -6,7 +6,7 @@ public class UserAccount {
     private String name;
     private String idToken; // Firebase Uid (고유 토큰)
     private String job;
-    private String purpose;
+    private String dic;
 
     public UserAccount() { }
 
@@ -50,11 +50,11 @@ public class UserAccount {
         this.job = job;
     }
 
-    public String getPurpose() {
-        return purpose;
+    public String getDic() {
+        return dic;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
+    public void setDic(String dic) {
+        this.dic = dic;
     }
 }
