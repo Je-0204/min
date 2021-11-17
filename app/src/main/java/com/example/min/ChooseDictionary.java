@@ -19,6 +19,7 @@ public class ChooseDictionary extends AppCompatActivity {
     private RadioButton radiobtn1,radiobtn2,radiobtn3,radiobtn4;
     private EditText editTextForBtn4;
     private int chooseDic;  //선택한 단어장 정보 리턴
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
