@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent getDicNumIntent=new Intent();
                 int addDicNum=getDicNumIntent.getIntExtra("addDic",-1);
 
+
             }
         });
         FloatingActionButton editFab=findViewById(R.id.floatingButton_editScreen);
