@@ -37,18 +37,17 @@ public class ChooseDictionary extends AppCompatActivity {
     public void choose(View view){
         //메인으로 이동
         Intent intent=new Intent();
-        ComponentName componentName=new ComponentName("com.example.min","com.example.min.MainActivity");
-        intent.setComponent(componentName);
         intent.putExtra("addDIc",chooseDic);
-        startActivity(intent);
+        setResult(chooseDic);
+        finish();
     }
     public void cancel(View view){
         //메인으로 이동
+        chooseDic=-1;
         Intent intent=new Intent();
-        ComponentName componentName=new ComponentName("com.example.min","com.example.min.MainActivity");
-        intent.setComponent(componentName);
-        intent.putExtra("addDIc",chooseDic);
-        startActivity(intent);
+        intent.putExtra("addDic",chooseDic);
+        setResult(chooseDic);
+        finish();
     }
     //라디오 그룹 클릭 리스너
      RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
@@ -56,19 +55,19 @@ public class ChooseDictionary extends AppCompatActivity {
      public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
          if(i == R.id.radiobtn1){
              editTextForBtn4.setEnabled(false);
-            Toast.makeText(ChooseDictionary.this, "나만의 단어장", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ChooseDictionary.this, "나만의 단어장", Toast.LENGTH_SHORT).show();
             chooseDic=1;
          } else if(i == R.id.radiobtn2){
              editTextForBtn4.setEnabled(false);
-            Toast.makeText(ChooseDictionary.this, "min 수능 단어장", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ChooseDictionary.this, "min 수능 단어장", Toast.LENGTH_SHORT).show();
              chooseDic=2;
          }else if(i == R.id.radiobtn3){
              editTextForBtn4.setEnabled(false);
-             Toast.makeText(ChooseDictionary.this, "min 토익 단어장", Toast.LENGTH_SHORT).show();
+             //Toast.makeText(ChooseDictionary.this, "min 토익 단어장", Toast.LENGTH_SHORT).show();
              chooseDic=3;
          }else if(i == R.id.radiobtn4){
              editTextForBtn4.setEnabled(true);
-             Toast.makeText(ChooseDictionary.this, "공유된 단어장", Toast.LENGTH_SHORT).show();
+             //Toast.makeText(ChooseDictionary.this, "공유된 단어장", Toast.LENGTH_SHORT).show();
              chooseDic=4;
          }
      }

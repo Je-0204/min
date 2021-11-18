@@ -36,7 +36,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     int dicCnt=0;   //추가한 단어장 개수 count
-    ArrayList<SampleData> movieDataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,155 +61,36 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.tab3); //공지사항
         tabHost.addTab(spec);
 
-        /*FloatingActionButton addFab=findViewById(R.id.floatingButton_addDic);
-        addFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
-                //Button newBtn=new Button(this);
-                Intent intent=new Intent();
-                ComponentName componentName=new ComponentName("com.example.min","com.example.min.ChooseDictionary");
-                intent.setComponent(componentName);
-                startActivity(intent);
 
-                //추가할 단어장 정보 받기
-                Intent getDicNumIntent=getIntent();
-                int addDicNum=getDicNumIntent.getIntExtra("addDic",-1);
-                Toast.makeText(MainActivity.this, addDicNum, Toast.LENGTH_LONG).show();
-
-                InitializeMovieData();
-
-                ListView listView = (ListView)findViewById(R.id.startList);
-                final MyAdapter myAdapter = new MyAdapter(MainActivity.this,movieDataList);
-
-                listView.setAdapter(myAdapter);
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(AdapterView parent, View v, int position, long id){
-                        Toast.makeText(getApplicationContext(),
-                                myAdapter.getItem(position).getDicName(),
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        });
-        FloatingActionButton editFab=findViewById(R.id.floatingButton_editScreen);
-        editFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"edit Dic 클릭",Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
     public void floatingButton_addDic(View view){
-        Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
-        //Button newBtn=new Button(this);
-        Intent intent=new Intent();
-        ComponentName componentName=new ComponentName("com.example.min","com.example.min.ChooseDictionary");
-        intent.setComponent(componentName);
-        startActivity(intent);
+        //Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(MainActivity.this, ChooseDictionary.class);
+        startActivityForResult(intent,3000);
 
-        //추가할 단어장 정보 받기
-        Intent getDicNumIntent=getIntent();
-        int addDicNum=getDicNumIntent.getIntExtra("addDic",-1);
-        Toast.makeText(MainActivity.this, addDicNum, Toast.LENGTH_LONG).show();
-
-        InitializeMovieData();
-
-        ListView listView = (ListView)findViewById(R.id.startList);
-        final MyAdapter myAdapter = new MyAdapter(MainActivity.this,movieDataList);
-
-        listView.setAdapter(myAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id){
-                Toast.makeText(getApplicationContext(),
-                        myAdapter.getItem(position).getDicName(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
     }
     public void floatingButton_editScreen(View view){
         Toast.makeText(getApplicationContext(),"edit Dic 클릭",Toast.LENGTH_SHORT).show();
     }
-    public void InitializeMovieData()
-    {
-        movieDataList = new ArrayList<SampleData>();
-
-        movieDataList.add(new SampleData("단어장1", "미션임파서블","15세 이상관람가"));
-        movieDataList.add(new SampleData("단어장2", "아저씨","19세 이상관람가"));
-        movieDataList.add(new SampleData("단어장3", "어벤져스","12세 이상관람가"));
-    }
-}
-//listview(추가한 단어장) 정보를 담기위한 클래스
-class SampleData {
-    private String dicName;
-    private String date;
-    private String wordCnt;
-
-    public SampleData(String dicName, String date, String wordCnt){
-        this.dicName = dicName;
-        this.date = date;
-        this.wordCnt = wordCnt;
-    }
-
-    public String getDicName()
-    {
-        return this.dicName;
-    }
-
-    public String getDate()
-    {
-        return this.date;
-    }
-
-    public String getWordCnt()
-    {
-        return this.wordCnt;
-    }
-}
-//어댑터 구현
-class MyAdapter extends BaseAdapter {
-
-    Context mContext = null;
-    LayoutInflater mLayoutInflater = null;
-    ArrayList<SampleData> sample;
-
-    public MyAdapter(Context context, ArrayList<SampleData> data) {
-        mContext = context;
-        sample = data;
-        mLayoutInflater = LayoutInflater.from(mContext);
-    }
 
     @Override
-    public int getCount() {
-        return sample.size();
-    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public SampleData getItem(int position) {
-        return sample.get(position);
-    }
-
-    @Override
-    public View getView(int position, View converView, ViewGroup parent) {
-        View view = mLayoutInflater.inflate(R.layout.listview_custom, null);
-
-        TextView imageView = view.findViewById(R.id.dicName);
-        TextView movieName = view.findViewById(R.id.date);
-        TextView grade = view.findViewById(R.id.wordCnt);
-
-        imageView.setText(sample.get(position).getDicName());
-        movieName.setText(sample.get(position).getDate());
-        grade.setText(sample.get(position).getWordCnt());
-
-        return view;
+        if(requestCode==3000) {
+            if (resultCode==1) {    //나만의 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }else if (resultCode==2) {  //min 수능 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }
+            else if (resultCode==3) {  //min 토익 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }
+            else if (resultCode==4) {  //공유된 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }else if (resultCode==-1) {  //취소버튼(단어장추가안해)
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
