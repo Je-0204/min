@@ -4,6 +4,8 @@
 //https://stackoverflow.com/questions/21950587/how-to-use-different-activities-with-tabhost-widget-in-android/21950690
 //https://doraeul.tistory.com/21
 //https://recipes4dev.tistory.com/42 - listView
+//https://recipes4dev.tistory.com/45 - listview and button
+//https://kiwinam.com/posts/23/android-start-activity-for-result/ -startactivityforresult()
 package com.example.min;
 
 import static android.service.controls.ControlsProviderService.TAG;
@@ -22,6 +24,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.min.ChooseDictionary;
 import com.example.min.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
