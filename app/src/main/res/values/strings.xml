@@ -30,4 +30,11 @@
     </string-array>
     <string name="congratulation">회원가입이\n완료되었습니다!</string>
 
+    <!--    <string-array name="dicRadio">-->
+    <!--        <item>나만의 단어장</item>-->
+    <!--        <item>min 수능 단어장</item>-->
+    <!--        <item>min 토익 단어장</item>-->
+    <!--        <item>공유된 단어장</item>-->
+    <!--    </string-array>-->
+
 </resources>

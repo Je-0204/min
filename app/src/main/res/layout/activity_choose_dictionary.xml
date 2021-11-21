@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="단어장 추가"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginBottom="10dp"></TextView>
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+        <RadioButton
+            android:id="@+id/radiobtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나만의 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min 수능 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min 토익 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공유된 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <EditText
+            android:id="@+id/editTextForSharingDic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="단어장 코드를 입력하세요"
+            android:enabled="false"></EditText>
+    </RadioGroup>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:onClick="cancel"
+            android:layout_alignBaseline="@id/addDicBtn"></Button>
+        <Button
+            android:id="@+id/addDicBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="choose"
+            android:text="추가"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"></Button>
+    </RelativeLayout>
+
+</LinearLayout>
