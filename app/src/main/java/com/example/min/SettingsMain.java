@@ -23,14 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-public class SettingsMain extends AppCompatActivity {
-
-    Button btn_logout_dialog;
-    Button btn_allow_logout;
-    Button btn_disallow_logout;
-    TextView tv_logout;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -41,8 +33,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 public class SettingsMain extends AppCompatActivity {
+
+    Button btn_logout_dialog;
+    Button btn_allow_logout;
+    Button btn_disallow_logout;
+    TextView tv_logout;
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
@@ -110,7 +106,7 @@ public class SettingsMain extends AppCompatActivity {
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        /*docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -125,7 +121,7 @@ public class SettingsMain extends AppCompatActivity {
                     Log.d(TAG, "get failed with", task.getException());
                 }
             }
-        });
+        });*/
     }
     //account withdrawl
 }
