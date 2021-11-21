@@ -100,10 +100,6 @@
                 android:id="@+id/tab2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
-                android:background="@color/purple_200"></TabWidget>
-        </LinearLayout>
-=======
                 android:text="tab2"
                 android:gravity="center"></TextView>
             <TextView
@@ -120,5 +116,4 @@
             android:layout_height="wrap_content"
             android:background="#DCDCDC"></TabWidget>
     </LinearLayout>
->>>>>>> 3d1f9bc4c3e9a269e9923082f43e1897fd5702c8
 </TabHost>
