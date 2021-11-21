@@ -5,7 +5,10 @@
 //https://doraeul.tistory.com/21
 //https://recipes4dev.tistory.com/42 - listView
 //https://recipes4dev.tistory.com/45 - listview and button
+//https://www.youtube.com/watch?v=aJ8pYAtMdlU - dynamically listview 유튜브
 //https://kiwinam.com/posts/23/android-start-activity-for-result/ -startactivityforresult()
+//https://stackoverflow.com/questions/2217753/changing-background-color-of-listview-items-on-android-리스트뷰 아이템 배경 바꾸기
+
 package com.example.min;
 
 import static android.service.controls.ControlsProviderService.TAG;
@@ -173,11 +176,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String name=(String) listview.getItemAtPosition(i);
                     Toast.makeText(getApplicationContext(),"ShortClick : "+name,Toast.LENGTH_SHORT).show();
-                    /*Intent intent=new Intent();
-                    ComponentName componentName=new ComponentName("com.example.test","com.example.test.ClickDictionary");
+                    Intent intent=new Intent();
+                    ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
-                    startActivity(intent);*/
+                    startActivity(intent);
 
                 }
             });
@@ -224,7 +227,7 @@ class ListViewAdapter extends ArrayAdapter<String> {
             settingBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //intent
+                    //intent for dicTheme
                     //Toast.makeText(getApplicationContext(), "click : settingBtn", Toast.LENGTH_LONG).show();
                 }
             });
