@@ -29,12 +29,6 @@ android {
         viewBinding true
     }
 
-    allprojects {
-        repositories {
-            google()
-            jcenter()
-        }
-    }
 }
 
 dependencies {
