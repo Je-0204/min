@@ -11,4 +11,6 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_modify_user_profile);
     }
+
+
 }

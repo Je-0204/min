@@ -121,5 +121,4 @@
                 android:layout_height="wrap_content"
                 android:background="@color/purple_200"></TabWidget>
         </LinearLayout>
-
 </TabHost>

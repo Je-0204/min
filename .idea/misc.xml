@@ -3,14 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-=======
-        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen01.xml" value="0.19882246376811594" />
-        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen02.xml" value="0.264" />
-        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.264" />
-        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/google_sign.xml" value="0.19882246376811594" />
-        <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/loginscreen01.xml" value="0.19882246376811594" />
->>>>>>> 87a5ebe8233e029cc6c6c811273d6bc08762566c
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/splash.xml" value="0.14270833333333333" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_memorize_words.xml" value="0.25" />
@@ -19,7 +11,12 @@
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.253125" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_splashscreen01.xml" value="0.13020833333333334" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/loginscreen01.xml" value="0.159375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/drawable/icon.xml" value="0.19479166666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_manage_push_notification.xml" value="0.33" />
@@ -32,10 +29,8 @@
         <entry key="app/src/main/res/layout/activity_signupscreen02.xml" value="0.190625" />
         <entry key="app/src/main/res/layout/activity_signupscreen03.xml" value="0.190625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19791666666666666" />
-<<<<<<< HEAD
-        <entry key="app/src/main/res/layout/loginscreen01.xml" value="0.190625" />
-=======
->>>>>>> 87a5ebe8233e029cc6c6c811273d6bc08762566c
+        <entry key="app/src/main/res/layout/loginscreen01.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.16302083333333334" />
       </map>
     </option>
   </component>
