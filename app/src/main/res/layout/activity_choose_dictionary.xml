@@ -28,14 +28,14 @@
             android:id="@+id/radiobtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min 토익 단어장"
+            android:text="min 수능 단어장"
             android:textSize="20dp"
             android:layout_marginTop="10dp"></RadioButton>
         <RadioButton
             android:id="@+id/radiobtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="min 수능 단어장"
+            android:text="min 토익 단어장"
             android:textSize="20dp"
             android:layout_marginTop="10dp"></RadioButton>
         <RadioButton

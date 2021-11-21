@@ -1,12 +1,17 @@
 package com.example.min;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.TextViewCompat;
 
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,11 +23,32 @@ public class SettingsMain extends AppCompatActivity {
     Button btn_disallow_logout;
     TextView tv_logout;
 
+=======
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+public class SettingsMain extends AppCompatActivity {
+
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private View user_name;
+    
+>>>>>>> d388358685c1ebe1f507ab9374eeec9c520b3973
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_main);
 
+<<<<<<< HEAD
         btn_logout_dialog = findViewById(R.id.logout);
 
         btn_logout_dialog.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +99,31 @@ public class SettingsMain extends AppCompatActivity {
         ad.setIcon(R.mipmap.ic_launcher);
         ad.setTitle("제목");
         ad.setMessage("홍드로이드");
+=======
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user_name = findViewById(R.id.user_name);
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        user_name.setText(document.get("Name").toString());
+                    }
+                    else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with", task.getException());
+                }
+            }
+        });
+>>>>>>> d388358685c1ebe1f507ab9374eeec9c520b3973
     }
     //account withdrawl
 }

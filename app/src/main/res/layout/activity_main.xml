@@ -18,6 +18,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:id="@+id/userBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#DCDCDC"
@@ -25,12 +26,12 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/username"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
-                        android:text="username"
                         android:textSize="30dp"
                         android:textStyle="bold"></TextView>
 
@@ -54,7 +55,8 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="#DCDCDC"
-                    android:src="@drawable/add_dic_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+                    android:src="@drawable/add_dic_icon"
+                    android:onClick="floatingButton_addDic"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floatingButton_editScreen"
@@ -63,7 +65,8 @@
                     android:layout_alignBottom="@id/floatingButton_addDic"
                     android:layout_toLeftOf="@id/floatingButton_addDic"
                     android:backgroundTint="#DCDCDC"
-                    android:src="@drawable/edit_screen_icon"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+                    android:src="@drawable/edit_screen_icon"
+                    android:onClick="floatingButton_editScreen"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
                 <!--                        <ImageButton-->
                 <!--                            android:id="@+id/imgButton_editScreen"-->
@@ -85,6 +88,13 @@
                 <!--                            android:layout_alignParentBottom="true"-->
                 <!--                            android:layout_alignParentEnd="true"-->
                 <!--                            android:layout_alignParentRight="true"></ImageButton>-->
+                <ListView
+                    android:id="@+id/startList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/purple_200"
+                    android:layout_below="@id/userBar"
+                    android:layout_margin="10dp"></ListView>
             </RelativeLayout>
             <TextView
                 android:id="@+id/tab2"

@@ -4,28 +4,73 @@
 //https://stackoverflow.com/questions/21950587/how-to-use-different-activities-with-tabhost-widget-in-android/21950690
 //https://doraeul.tistory.com/21
 //https://recipes4dev.tistory.com/42 - listView
+//https://recipes4dev.tistory.com/45 - listview and button
+//https://kiwinam.com/posts/23/android-start-activity-for-result/ -startactivityforresult()
 package com.example.min;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.min.ChooseDictionary;
 import com.example.min.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
+    int dicCnt=0;   //추가한 단어장 개수 count
+
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private TextView username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        username = findViewById(R.id.username);
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        username.setText(document.get("Name").toString());
+                    }
+                    else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with", task.getException());
+                }
+            }
+        });
 
         TabHost tabHost=findViewById(R.id.host);
         tabHost.setup();
@@ -38,32 +83,43 @@ public class MainActivity extends AppCompatActivity {
 
         spec= tabHost.newTabSpec("tab2");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.notice_icon,null));
-        spec.setContent(R.id.tab2);
+        spec.setContent(R.id.tab2); //settingmain
         tabHost.addTab(spec);
 
         spec= tabHost.newTabSpec("tab3");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
-        spec.setContent(R.id.tab3);
+        spec.setContent(R.id.tab3); //공지사항
         tabHost.addTab(spec);
 
-        FloatingActionButton addFab=findViewById(R.id.floatingButton_addDic);
-        addFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
-                //Button newBtn=new Button(this);
-                Intent intent=new Intent();
-                ComponentName componentName=new ComponentName("com.example.min","com.example.min.ChooseDictionary");
-                intent.setComponent(componentName);
-                startActivity(intent);
+    }
+    public void floatingButton_addDic(View view){
+        //Toast.makeText(getApplicationContext(),"add Dic 클릭",Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(MainActivity.this, ChooseDictionary.class);
+        startActivityForResult(intent,3000);
+
+    }
+    public void floatingButton_editScreen(View view){
+        Toast.makeText(getApplicationContext(),"edit Dic 클릭",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==3000) {
+            if (resultCode==1) {    //나만의 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }else if (resultCode==2) {  //min 수능 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
-        });
-        FloatingActionButton editFab=findViewById(R.id.floatingButton_editScreen);
-        editFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"edit Dic 클릭",Toast.LENGTH_SHORT).show();
+            else if (resultCode==3) {  //min 토익 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
-        });
+            else if (resultCode==4) {  //공유된 단어장 추가
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }else if (resultCode==-1) {  //취소버튼(단어장추가안해)
+                Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

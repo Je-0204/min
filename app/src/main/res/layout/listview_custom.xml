@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/dicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(나만의 단어장)"></TextView>
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0+일전 방문"></TextView>
+    <TextView
+        android:id="@+id/wordCnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="외운개수"
+        android:textSize="30dp"></TextView>
+
+</LinearLayout>
