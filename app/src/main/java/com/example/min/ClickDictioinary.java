@@ -1,14 +1,18 @@
 //https://www.youtube.com/watch?v=plnLs6aST1M - 단어장 수정 dialog
 package com.example.min;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,11 +50,61 @@ public class ClickDictioinary extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String name=(String) listview.getItemAtPosition(position);
                 Toast.makeText(getApplicationContext(),"ShortClick : "+name,Toast.LENGTH_SHORT).show();
-                /*//단어 수정/삭제 screen
-                Intent intent=new Intent();
+                //단어 수정/삭제 screen
+                AlertDialog.Builder builder=new AlertDialog.Builder(ClickDictioinary.this);
+                View view1=getLayoutInflater().inflate(R.layout.custom_dialog_layout01,null);
+                EditText et1=view1.findViewById(R.id.engWord);
+                EditText et2=view1.findViewById(R.id.engMeaning);
+                builder.setPositiveButton("저장", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(ClickDictioinary.this,et1.getText().toString(),Toast.LENGTH_SHORT).show();
+                        items.set(position,et1.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setView(view1);
+                AlertDialog alertDialog=builder.create();
+                alertDialog.show();
+
+
+                /*Intent intent=new Intent();
                 ComponentName componentName=new ComponentName("com.example.min","com.example.min.screen");
                 intent.setComponent(componentName);
                 startActivity(intent);*/
+            }
+        });
+        listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"Removed : "+items.get(position),Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder ad=new AlertDialog.Builder(ClickDictioinary.this);
+                ad.setIcon(R.mipmap.ic_launcher);//삭제 이미지
+                ad.setTitle("단어 삭제");
+                ad.setMessage("단어를 삭제하시겠습니까?");
+                ad.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        items.remove(position);
+                        listview.setAdapter(adapter);
+                        dialog.dismiss();
+                    }
+                });
+                ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                ad.show();
+
+                return true;
             }
         });
 
