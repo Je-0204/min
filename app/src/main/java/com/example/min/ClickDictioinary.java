@@ -26,6 +26,8 @@ public class ClickDictioinary extends AppCompatActivity {
     ArrayAdapter adapter;
     // listview 생성 및 adapter 지정.
     ListView listview;
+    //단어 뜻 저장하는 리스트, 데이터리스트와 짝꿍
+    ArrayList<String> itemMeanings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class ClickDictioinary extends AppCompatActivity {
         // listview 생성 및 adapter 지정.
         listview = (ListView) findViewById(R.id.listview1) ;
         listview.setAdapter(adapter) ;
+        itemMeanings=new ArrayList<String>();
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -54,12 +57,15 @@ public class ClickDictioinary extends AppCompatActivity {
                 AlertDialog.Builder builder=new AlertDialog.Builder(ClickDictioinary.this);
                 View view1=getLayoutInflater().inflate(R.layout.custom_dialog_layout01,null);
                 EditText et1=view1.findViewById(R.id.engWord);
+                et1.setText(items.get(position));
                 EditText et2=view1.findViewById(R.id.engMeaning);
+                et2.setText(itemMeanings.get(position));
                 builder.setPositiveButton("저장", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(ClickDictioinary.this,et1.getText().toString(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ClickDictioinary.this,et1.getText().toString(),Toast.LENGTH_SHORT).show();
                         items.set(position,et1.getText().toString());
+                        itemMeanings.set(position,et2.getText().toString());
                         dialog.dismiss();
                     }
                 });
@@ -72,18 +78,12 @@ public class ClickDictioinary extends AppCompatActivity {
                 builder.setView(view1);
                 AlertDialog alertDialog=builder.create();
                 alertDialog.show();
-
-
-                /*Intent intent=new Intent();
-                ComponentName componentName=new ComponentName("com.example.min","com.example.min.screen");
-                intent.setComponent(componentName);
-                startActivity(intent);*/
             }
         });
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"Removed : "+items.get(position),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Removed : "+items.get(position),Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder ad=new AlertDialog.Builder(ClickDictioinary.this);
                 ad.setIcon(R.mipmap.ic_launcher);//삭제 이미지
                 ad.setTitle("단어 삭제");
@@ -92,6 +92,7 @@ public class ClickDictioinary extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         items.remove(position);
+                        itemMeanings.remove(position);
                         listview.setAdapter(adapter);
                         dialog.dismiss();
                     }
@@ -111,13 +112,33 @@ public class ClickDictioinary extends AppCompatActivity {
     }
 
     public void add(View view){
-        int count;
-        count = adapter.getCount();
-        // 아이템 추가.
-        items.add("LIST" + Integer.toString(count + 1));
         // listview 갱신
         listview.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
+
+        AlertDialog.Builder builder=new AlertDialog.Builder(ClickDictioinary.this);
+        View view1=getLayoutInflater().inflate(R.layout.custom_dialog_layout02,null);//add word custom dialog
+        EditText et1=view1.findViewById(R.id.engWord);
+        EditText et2=view1.findViewById(R.id.engMeaning);
+        builder.setPositiveButton("추가", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Toast.makeText(ClickDictioinary.this,et1.getText().toString(),Toast.LENGTH_SHORT).show();
+                // 아이템 추가.
+                items.add(et1.getText().toString());
+                itemMeanings.add(et2.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setView(view1);
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
+
     }
     public void memorize(View view){
 

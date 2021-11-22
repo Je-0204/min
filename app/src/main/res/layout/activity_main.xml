@@ -68,26 +68,6 @@
                     android:src="@drawable/edit_screen_icon"
                     android:onClick="floatingButton_editScreen"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-                <!--                        <ImageButton-->
-                <!--                            android:id="@+id/imgButton_editScreen"-->
-                <!--                            android:layout_width="70dp"-->
-                <!--                            android:layout_height="70dp"-->
-                <!--                            android:adjustViewBounds="true"-->
-                <!--                            android:scaleType="fitCenter"-->
-                <!--                            android:src="@drawable/edit_screen_icon"-->
-                <!--                            android:layout_toLeftOf="@id/imgButton_addDic"-->
-                <!--                            android:layout_alignParentBottom="true"-->
-                <!--                            ></ImageButton>-->
-                <!--                        <ImageButton-->
-                <!--                            android:id="@+id/imgButton_addDic"-->
-                <!--                            android:layout_width="70dp"-->
-                <!--                            android:layout_height="70dp"-->
-                <!--                            android:adjustViewBounds="true"-->
-                <!--                            android:scaleType="fitCenter"-->
-                <!--                            android:src="@drawable/add_dic_icon"-->
-                <!--                            android:layout_alignParentBottom="true"-->
-                <!--                            android:layout_alignParentEnd="true"-->
-                <!--                            android:layout_alignParentRight="true"></ImageButton>-->
                 <ListView
                     android:id="@+id/listView1"
                     android:layout_width="match_parent"
