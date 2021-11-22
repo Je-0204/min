@@ -37,8 +37,7 @@
             android:layout_height="wrap_content"
             android:text="로그인"
             android:layout_gravity="end"
-            android:layout_marginBottom="30dp"
-            android:onClick="login"></androidx.appcompat.widget.AppCompatButton>
+            android:layout_marginBottom="30dp"></androidx.appcompat.widget.AppCompatButton>
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

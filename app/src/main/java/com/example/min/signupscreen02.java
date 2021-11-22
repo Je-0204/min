@@ -50,10 +50,10 @@ public class signupscreen02 extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btn_register);
 
-        Intent getSignUp01Info=getIntent();
+        /*Intent getSignUp01Info=getIntent();
         String job=getSignUp01Info.getStringExtra("job");
         String dic=getSignUp01Info.getStringExtra("dic");
-        //Toast.makeText(signupscreen02.this,job+dic,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(signupscreen02.this,job+dic,Toast.LENGTH_SHORT).show();*/
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override

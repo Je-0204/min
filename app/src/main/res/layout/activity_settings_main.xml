@@ -20,12 +20,8 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
-<<<<<<< HEAD
-        <TextView
-=======
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/affiliation"
->>>>>>> d388358685c1ebe1f507ab9374eeec9c520b3973
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
