@@ -175,16 +175,22 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     String name=(String) listview.getItemAtPosition(i);
-                    Toast.makeText(getApplicationContext(),"ShortClick : "+name,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"ShortClick : "+name,Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent();
                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
                     startActivity(intent);
-
                 }
             });
-
+            listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    String name=(String) listview.getItemAtPosition(position);
+                    Toast.makeText(getApplicationContext(),"LongClick : "+name,Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });
             adapter = new ListViewAdapter(getApplicationContext(), items);
             listview.setAdapter(adapter);
             addItem(text);
@@ -229,6 +235,7 @@ class ListViewAdapter extends ArrayAdapter<String> {
                 public void onClick(View view) {
                     //intent for dicTheme
                     //Toast.makeText(getApplicationContext(), "click : settingBtn", Toast.LENGTH_LONG).show();
+
                 }
             });
 
