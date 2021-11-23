@@ -19,17 +19,6 @@
         android:textSize="30dp"
         android:layout_marginTop="10dp"></TextView>
 
-    <ImageView
-        android:id="@+id/iv_profile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NickName" />
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"

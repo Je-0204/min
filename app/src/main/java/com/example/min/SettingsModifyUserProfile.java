@@ -37,7 +37,7 @@ public class SettingsModifyUserProfile extends AppCompatActivity{
             public void onClick(View view){
                 if(ContextCompat.checkSelfPermission(SettingsModifyUserProfile.this,
                         Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(SettingsModifyUserProfile.this, "You have already granted this permission", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(SettingsModifyUserProfile.this, "You have already granted this permission", Toast.LENGTH_SHORT).show();
                 } else {
                     requestStoragePermission();
                 }

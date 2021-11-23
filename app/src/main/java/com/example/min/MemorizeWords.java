@@ -28,7 +28,7 @@ public class MemorizeWords extends AppCompatActivity {
     String[] problems = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
     String[] solutions = {"하나", "둘", "셋", "넷", "다섯", "여섯", "일곱", "여덞", "아홉", "열"};
     boolean[] isUsedSolutions;
-    String[] wrong_solutions = {"사자", "호랑이", "원숭이", "코기리", "개", "고양이", "하마", "기린", "염소", "소"}
+    String[] wrong_solutions = {"사자", "호랑이", "원숭이", "코기리", "개", "고양이", "하마", "기린", "염소", "소"};
 
 
     @Override
@@ -172,7 +172,7 @@ public class MemorizeWords extends AppCompatActivity {
 
                 for(int i = 0; i < 4; ++i) {
                     isClicked[i] = false;
-                    multiple_choice[i].setBackground(getResources().getColor(R.color.design_default_color_background);
+                    //multiple_choice[i].setBackground(getResources().getColor(R.color.design_default_color_background));
                 }
                 for (int i = 0; i < 10; ++i) {
                     isUsedSolutions[i] = false;

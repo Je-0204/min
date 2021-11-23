@@ -39,15 +39,17 @@ public class signupscreen01 extends AppCompatActivity {
 
     String selectedJob;
     String selectedDic;
+    String department;  //소속입력받기
+    EditText et_department;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signupscreen01);
 
+        et_department=findViewById(R.id.department);
         spinnerJob = findViewById(R.id.spinner_job);
         spinnerDic = findViewById(R.id.spinner_dic);
-
 
         spinnerJob = findViewById(R.id.spinner_job);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(signupscreen01.this, R.array.job, android.R.layout.simple_spinner_item);
@@ -78,6 +80,8 @@ public class signupscreen01 extends AppCompatActivity {
 
             }
         });
+
+        department=et_department.getText().toString();  //소속
     }
     public void next(View view){
         Intent intent = new Intent();
