@@ -58,7 +58,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"></TextView>
     <EditText
-        android:id="@+id/department"
+        android:id="@+id/set_affiliation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="소속을 입력해주세요"></EditText>

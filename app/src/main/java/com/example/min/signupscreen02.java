@@ -40,6 +40,7 @@ public class signupscreen02 extends AppCompatActivity {
         Intent getSignUp01Info = getIntent();
         String Job = getSignUp01Info.getStringExtra("Job");
         String Dic = getSignUp01Info.getStringExtra("Dic");
+        String Affiliation = getSignUp01Info.getStringExtra("Affiliation");
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -76,6 +77,7 @@ public class signupscreen02 extends AppCompatActivity {
                                     account.setName(strName);
                                     account.setJob(Job);
                                     account.setDic(Dic);
+                                    account.setAffiliation(Affiliation);
 
                                     Map<String, Object> user = new HashMap<>();
                                     user.put("ID", account.getEmailId());
@@ -84,6 +86,7 @@ public class signupscreen02 extends AppCompatActivity {
                                     user.put("IDToken", account.getIdToken());
                                     user.put("Job", account.getJob());
                                     user.put("Dic", account.getDic());
+                                    user.put("Affiliation", account.getAffiliation());
 
                                     db.collection("UserInfo")
                                             .document(account.getIdToken())

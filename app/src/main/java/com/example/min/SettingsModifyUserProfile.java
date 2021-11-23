@@ -1,29 +1,30 @@
 package com.example.min;
 
+import static android.service.controls.ControlsProviderService.TAG;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class SettingsModifyUserProfile extends AppCompatActivity{
-    private final int STORAGE_PERMISSION_CODE = 1;
-    ImageView profile_image;
-    Button btn_change_profile_image;
+public class SettingsModifyUserProfile extends AppCompatActivity {
+
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    AppCompatEditText change_name;
+    AppCompatEditText change_affiliation;
+    AppCompatButton btn_apply;
 
 
     @Override
@@ -31,52 +32,43 @@ public class SettingsModifyUserProfile extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_modify_user_profile);
 
-        Button btn_request = findViewById(R.id.btn_change_profile_image);
-        btn_request.setOnClickListener(new View.OnClickListener(){
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        change_name = findViewById(R.id.change_name);
+        change_affiliation = findViewById(R.id.change_affiliation);
+        btn_apply = findViewById(R.id.apply);
+
+        btn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                if(ContextCompat.checkSelfPermission(SettingsModifyUserProfile.this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(SettingsModifyUserProfile.this, "You have already granted this permission", Toast.LENGTH_SHORT).show()
-                } else {
-                    requestStoragePermission();
-                }
+            public void onClick(View view) {
+                String name = change_name.getText().toString();
+                String affiliation = change_affiliation.getText().toString();
+
+                UserAccount account = new UserAccount();
+                account.setName(name);
+                account.setAffiliation(affiliation);
+
+                DocumentReference updateRef = db.collection("UserInfo").document(account.getIdToken());
+
+                updateRef
+                        .update("Name", account.getName(), "Affiliation", account.getAffiliation())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d(TAG, "DocumentSnapshot successfully updated!");
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error Updating document", e);
+                            }
+                        });
             }
         });
+
     }
 
-    private void requestStoragePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-            new AlertDialog.Builder(this)
-                    .setTitle("Permission needed")
-                    .setMessage("This permission is needed because fo ths and that")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(SettingsModifyUserProfile.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .create().show();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-        }
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == STORAGE_PERMISSION_CODE) {
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Toast.makeText(this, "Permission GRANTED", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, "Permission DINIED", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

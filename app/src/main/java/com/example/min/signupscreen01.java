@@ -39,19 +39,19 @@ public class signupscreen01 extends AppCompatActivity {
 
     String selectedJob;
     String selectedDic;
-    String department;  //소속입력받기
-    EditText et_department;
+    String affiliation;
+    EditText et_affiliation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signupscreen01);
 
-        et_department=findViewById(R.id.department);
+        et_affiliation = findViewById(R.id.set_affiliation);
+        affiliation = et_affiliation.getText().toString();
         spinnerJob = findViewById(R.id.spinner_job);
         spinnerDic = findViewById(R.id.spinner_dic);
 
-        spinnerJob = findViewById(R.id.spinner_job);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(signupscreen01.this, R.array.job, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerJob.setAdapter(adapter);
@@ -80,15 +80,15 @@ public class signupscreen01 extends AppCompatActivity {
 
             }
         });
-
-        department=et_department.getText().toString();  //소속
     }
+
     public void next(View view){
         Intent intent = new Intent();
         ComponentName componentName = new ComponentName("com.example.min","com.example.min.signupscreen02");
         intent.setComponent(componentName);
         intent.putExtra("Job",selectedJob);
         intent.putExtra("Dic",selectedDic);
+        intent.putExtra("Affiliation", affiliation);
         startActivity(intent);
     }
 }

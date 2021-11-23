@@ -43,6 +43,7 @@ public class SettingsMain extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private TextView user_name;
+    private TextView affiliation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class SettingsMain extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         user_name = findViewById(R.id.user_name);
+        affiliation = findViewById(R.id.affiliation);
         btn_logout_dialog = findViewById(R.id.logout);
         btn_withdrawal = findViewById(R.id.withdrawal);
 
@@ -66,6 +68,7 @@ public class SettingsMain extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         user_name.setText(document.get("Name").toString());
+                        affiliation.setText(document.get("Affiliation").toString());
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -91,6 +94,7 @@ public class SettingsMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 auth.getCurrentUser().delete();
+
                 Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
                 startActivity(intent);
                 finish();
