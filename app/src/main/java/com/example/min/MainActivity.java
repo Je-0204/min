@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.app.Activity;
+import android.app.ActivityGroup;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,7 +70,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActivityGroup {
+    TabHost.TabSpec spec;
     int dicCnt=0;   //추가한 단어장 개수 count
 
     private FirebaseAuth auth;
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TabHost tabHost=findViewById(R.id.host);
+        /*TabHost tabHost=findViewById(R.id.host);
         tabHost.setup();
 
         TabHost.TabSpec spec= tabHost.newTabSpec("tab1");
@@ -129,7 +131,28 @@ public class MainActivity extends AppCompatActivity {
 
         spec= tabHost.newTabSpec("tab3");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
-        spec.setContent(R.id.tab3); //공지사항
+        spec.setContent(R.id.tab3); //notification
+        tabHost.addTab(spec);*/
+
+        TabHost tabHost=findViewById(R.id.host);
+        tabHost.setup(this.getLocalActivityManager());
+
+        spec= tabHost.newTabSpec("tab1");
+        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.mypage_icon,null));
+        spec.setContent(R.id.tab1);
+        tabHost.addTab(spec);
+
+
+        spec= tabHost.newTabSpec("tab2");
+        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.notice_icon,null));
+        Intent intent1=new Intent(this,SettingsMain.class);
+        spec.setContent(intent1);
+        tabHost.addTab(spec);
+
+        spec= tabHost.newTabSpec("tab3");
+        spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
+        Intent intent=new Intent(this,Notification.class);
+        spec.setContent(intent);
         tabHost.addTab(spec);
 
     }

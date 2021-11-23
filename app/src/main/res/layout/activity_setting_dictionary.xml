@@ -4,13 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/color1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_200"></Button>
-    <Button
-        android:layout_width="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fbe993"
+            android:onClick="yellow"
+            android:layout_margin="10dp"></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#fdc7c2"
+            android:onClick="pink"
+            android:layout_margin="10dp"></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#98e99e"
+            android:onClick="green"
+            android:layout_margin="10dp"></Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/color2"
+        android:layout_below="@id/color1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_200"></Button>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#7ab7df"
+            android:onClick="blue"
+            android:layout_margin="10dp"></Button>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#cba5dc"
+            android:onClick="purple"
+            android:layout_margin="10dp"></Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#e0e0e0"
+            android:onClick="gray"
+            android:layout_margin="10dp"></Button>
+    </LinearLayout>
 
 </RelativeLayout>
