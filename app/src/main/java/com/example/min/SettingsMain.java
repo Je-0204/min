@@ -38,25 +38,62 @@ public class SettingsMain extends AppCompatActivity {
     Button btn_logout_dialog;
     Button btn_allow_logout;
     Button btn_disallow_logout;
-    TextView tv_logout;
+    Button btn_withdrawal;
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
-    private View user_name;
+    private TextView user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_main);
 
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        user_name = findViewById(R.id.user_name);
         btn_logout_dialog = findViewById(R.id.logout);
+        btn_withdrawal = findViewById(R.id.withdrawal);
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        user_name.setText(document.get("Name").toString());
+                    }
+                    else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with", task.getException());
+                }
+            }
+        });
 
         btn_logout_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                auth.signOut();
 
+                Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-
+        btn_withdrawal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.getCurrentUser().delete();
+                Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -99,29 +136,6 @@ public class SettingsMain extends AppCompatActivity {
         ad.setIcon(R.mipmap.ic_launcher);
         ad.setTitle("제목");
         ad.setMessage("홍드로이드");
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        user_name = findViewById(R.id.user_name);
-
-        FirebaseUser firebaseUser = auth.getCurrentUser();
-
-        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
-        /*docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        user_name.setText(document.get("Name").toString());
-                    }
-                    else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with", task.getException());
-                }
-            }
-        });*/
     }
     //account withdrawl
 }

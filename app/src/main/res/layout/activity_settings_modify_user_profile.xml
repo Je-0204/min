@@ -68,39 +68,18 @@
                 android:layout_height="wrap_content"
                 android:text="Name"/>
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/change_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="current_name"
                 android:selectAllOnFocus="true"
                 android:inputType="textPersonName"/>
-            <!--modify user id-->
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ID"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="current_id"
-                android:selectAllOnFocus="true"
-                android:inputType="text"/>
-            <!--Modify user status-->
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Status"/>
-            <androidx.appcompat.widget.AppCompatEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="current_status"
-                android:selectAllOnFocus="true"
-                android:inputType="text"/>
-            <!--modify user affiliation-->
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Affiliation"/>
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/change_affiliation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="current_affiliation"
@@ -114,6 +93,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="end">
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/apply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="apply"/>

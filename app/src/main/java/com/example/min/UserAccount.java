@@ -7,6 +7,7 @@ public class UserAccount {
     private String idToken; // Firebase Uid (고유 토큰)
     private String job;
     private String dic;
+    private String affiliation;
 
     public UserAccount() { }
 
@@ -56,5 +57,13 @@ public class UserAccount {
 
     public void setDic(String dic) {
         this.dic = dic;
+    }
+
+    public String getAffiliation() {
+        return affiliation;
+    }
+
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
     }
 }

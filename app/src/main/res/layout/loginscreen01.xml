@@ -58,14 +58,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/darker_gray"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Google 으로 로그인"
-            android:onClick="google"></androidx.appcompat.widget.AppCompatButton>
 
         <TextView
             android:id="@+id/text_signup"

@@ -153,6 +153,7 @@
             android:layout_height="wrap_content"
             android:text="logout"/>
         <Button
+            android:id="@+id/withdrawal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ff0f0f"
