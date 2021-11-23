@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Min">
         <activity
+            android:name=".Notification"
+            android:exported="true" />
+        <activity
             android:name=".SettingDictionary"
             android:exported="true">
             <intent-filter>
