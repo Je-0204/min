@@ -103,4 +103,7 @@
         </activity>
     </application>
 
+    <!--gallery-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 </manifest>
