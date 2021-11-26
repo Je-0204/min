@@ -14,6 +14,7 @@ package com.example.min;
 import static android.service.controls.ControlsProviderService.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -21,6 +22,7 @@ import androidx.core.content.res.ResourcesCompat;
 import android.app.Activity;
 import android.app.ActivityGroup;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -207,6 +209,26 @@ public class MainActivity extends ActivityGroup {
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                     String name=(String) listview.getItemAtPosition(position);
                     Toast.makeText(getApplicationContext(),"LongClick : "+name,Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder ad=new AlertDialog.Builder(MainActivity.this);
+                    ad.setIcon(R.mipmap.ic_launcher);//삭제 이미지
+                    ad.setTitle("단어장 삭제");
+                    ad.setMessage("단어장을 삭제하시겠습니까?");
+                    ad.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            items.remove(position);
+                            listview.setAdapter(adapter);
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+
                     return true;
                 }
             });
