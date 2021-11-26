@@ -60,7 +60,7 @@ public class SettingsMain extends AppCompatActivity {
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
-        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        /*DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -77,7 +77,7 @@ public class SettingsMain extends AppCompatActivity {
                     Log.d(TAG, "get failed with", task.getException());
                 }
             }
-        });
+        });*/
 
         btn_logout_dialog.setOnClickListener(new View.OnClickListener() {
             @Override

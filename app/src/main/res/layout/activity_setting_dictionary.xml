@@ -3,27 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="단어장 설정"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginBottom="10dp"></TextView>
+    <View
+        android:id="@+id/lineBottomOfTitle"
+        android:layout_below="@id/title"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#a9a9a9"></View>
     <LinearLayout
+        android:layout_below="@id/lineBottomOfTitle"
         android:id="@+id/color1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_margin="10dp"
             android:background="#fbe993"
-            android:onClick="yellow"
-            android:layout_margin="10dp"></Button>
+            android:onClick="yellow"></Button>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:background="#fdc7c2"
             android:onClick="pink"
             android:layout_margin="10dp"></Button>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:background="#98e99e"
             android:onClick="green"
             android:layout_margin="10dp"></Button>
@@ -34,26 +53,94 @@
         android:layout_below="@id/color1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:background="#7ab7df"
             android:onClick="blue"
             android:layout_margin="10dp"></Button>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:background="#cba5dc"
             android:onClick="purple"
             android:layout_margin="10dp"></Button>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
             android:background="#e0e0e0"
             android:onClick="gray"
             android:layout_margin="10dp"></Button>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/alarm"
+        android:layout_below="@id/color2"
+        android:layout_margin="10dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#a9a9a9"></View>
+        <CheckBox
+            android:id="@+id/alarmCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림 수신"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></CheckBox>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* 아침 7시 단어 암기 알림 발송"
+            android:layout_marginLeft="10dp"></TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="* 저녁 9시 단어 암기 알림 발송"
+            android:layout_marginLeft="10dp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/alarm"
+        android:layout_margin="10dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#a9a9a9"></View>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="단어장 공유 코드"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="abcdefg-hijklmn"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"></TextView>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:onClick="OK"></Button>
 </RelativeLayout>

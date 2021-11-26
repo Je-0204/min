@@ -15,12 +15,14 @@ import static android.service.controls.ControlsProviderService.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.app.Activity;
 import android.app.ActivityGroup;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,7 +74,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActivityGroup {
     TabHost.TabSpec spec;
-    int dicCnt=0;   //추가한 단어장 개수 count
+    int seletedItem=0;   //선택된단어장
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
@@ -97,7 +99,7 @@ public class MainActivity extends ActivityGroup {
         username = findViewById(R.id.username);
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
-        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        /*DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -113,22 +115,18 @@ public class MainActivity extends ActivityGroup {
                     Log.d(TAG, "get failed with", task.getException());
                 }
             }
-        });
+        });*/
 
         /*TabHost tabHost=findViewById(R.id.host);
         tabHost.setup();
-
         TabHost.TabSpec spec= tabHost.newTabSpec("tab1");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.mypage_icon,null));
         spec.setContent(R.id.tab1);
         tabHost.addTab(spec);
-
-
         spec= tabHost.newTabSpec("tab2");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.notice_icon,null));
         spec.setContent(R.id.tab2); //settingmain
         tabHost.addTab(spec);
-
         spec= tabHost.newTabSpec("tab3");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
         spec.setContent(R.id.tab3); //notification
@@ -145,13 +143,13 @@ public class MainActivity extends ActivityGroup {
 
         spec= tabHost.newTabSpec("tab2");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.notice_icon,null));
-        Intent intent1=new Intent(this,SettingsMain.class);
+        Intent intent1=new Intent(this,Notification.class); //Notification
         spec.setContent(intent1);
         tabHost.addTab(spec);
 
         spec= tabHost.newTabSpec("tab3");
         spec.setIndicator(null, ResourcesCompat.getDrawable(getResources(),R.drawable.setting_icon,null));
-        Intent intent=new Intent(this,Notification.class);
+        Intent intent=new Intent(this,SettingsMain.class);  //SettingsMain
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -169,7 +167,6 @@ public class MainActivity extends ActivityGroup {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         String text="null";
         if(requestCode==3000) {
@@ -192,8 +189,7 @@ public class MainActivity extends ActivityGroup {
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
         }
-
-        if(resultCode!=-1){
+        if(requestCode==3000&&resultCode!=-1){
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -218,6 +214,14 @@ public class MainActivity extends ActivityGroup {
             listview.setAdapter(adapter);
             addItem(text);
         }
+        if(requestCode==4000){
+            if (resultCode==-1) {  //result_ok
+                //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
+                String itemColor=data.getStringExtra("color");
+                //Toast.makeText(MainActivity.this, itemColor, Toast.LENGTH_LONG).show();
+                changeItemColor(ListViewAdapter.getSelectedDic(),itemColor);
+            }
+        }
     }
     public static void removeItem(int remove){
         items.remove(remove);
@@ -227,12 +231,36 @@ public class MainActivity extends ActivityGroup {
         items.add(item);
         listview.setAdapter(adapter);
     }
+    public static void changeItemColor(int change,String color){
+        switch (color){
+            case "YELLOW":
+                listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_yellow));
+                break;
+            case "PINK":
+                listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_pink));
+                break;
+            case "GREEN":
+                listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_green));
+                break;
+            case "BLUE":
+                listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_blue));
+                break;
+            case "PURPLE":
+                listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_purple));
+                break;
+            case "GRAY":
+                listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_gray));
+                break;
+        }
+
+    }
 
 }
 
 class ListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
-    Context context;
+    static Context context;
+    static int selectedDic;
     public ListViewAdapter(Context context, ArrayList<String> items){
         super(context,R.layout.listview_custom,items);
         this.context=context;
@@ -245,25 +273,27 @@ class ListViewAdapter extends ArrayAdapter<String> {
         if(convertView==null){
             LayoutInflater layoutInflater=(LayoutInflater) getContext().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView=layoutInflater.inflate(R.layout.listview_custom,null);
-
-            TextView date=convertView.findViewById(R.id.date);
-
-            TextView name=convertView.findViewById(R.id.dicName);
-            name.setText(list.get(position));
-
-            ImageView settingBtn=convertView.findViewById(R.id.dicSetting);
-
-            settingBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //intent for dicTheme
-                    //Toast.makeText(getApplicationContext(), "click : settingBtn", Toast.LENGTH_LONG).show();
-
-                }
-            });
-
-
         }
+        context=parent.getContext();
+        TextView date=convertView.findViewById(R.id.date);
+
+        TextView name=convertView.findViewById(R.id.dicName);
+        name.setText(list.get(position));
+
+        ImageView settingBtn=convertView.findViewById(R.id.dicSetting);settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //goto SettingDic.class
+                //Toast.makeText(context, "click : settingBtn", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(context,SettingDictionary.class);
+                ((Activity) context).startActivityForResult(intent,4000);
+                selectedDic=position;
+            }
+        });
         return convertView;
     }
+    static public int getSelectedDic(){
+        return selectedDic;
+    }
+
 }
