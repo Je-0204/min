@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -67,8 +70,20 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
                         });
             }
         });
-
     }
 
+    public void back_to_settings_main(View view){
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.example.min", "com.example.min.SettingsMain");
+        intent.setComponent(componentName);
+        startActivity(intent);
+    }
 
+    public void apply_modification(View view){
+        Toast.makeText(getApplicationContext(), "변경되었습니다.",Toast.LENGTH_SHORT).show();
+    }
+
+    public void cancel_modification(View view){
+        Toast.makeText(getApplicationContext(), "취소되었습니다.",Toast.LENGTH_SHORT).show();
+    }
 }

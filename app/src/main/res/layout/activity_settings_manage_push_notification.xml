@@ -1,123 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <!--header-->
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
         <!--go to settings main button-->
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="back_to_settings_main"/>
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:text="Manage Push Notification"
-            android:textSize="20dp"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:text="푸쉬 알림 관리"
+            android:textSize="20dp" />
+    </LinearLayout>
 
     <!-- global settings for push notification-->
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="global settings for push notifications" />
-        <androidx.appcompat.widget.SwitchCompat
+            android:text="전체 알림 관리" />
+        <Switch
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="All push notification to notice"
+            android:text="공지 알림"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
-        <androidx.appcompat.widget.SwitchCompat
+        <Switch
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="All push notification for today's words"
+            android:text="오늘의 단어 알림"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
-        <androidx.appcompat.widget.SwitchCompat
+        <Switch
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="All push notification to encourage study"
+            android:text="전체 단어장 학습 장려 알림"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
     <!-- settings per vocabulary for push notification-->
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:orientation="vertical">
-        <androidx.appcompat.widget.AppCompatTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="settings per vacabulary for push notifications" />
-        <androidx.appcompat.widget.LinearLayoutCompat
+            android:text="단어장 별 알림 관리"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
-                <androidx.appcompat.widget.AppCompatTextView
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
-                    android:text="vacabulary name"/>
+                    android:text="단어장 1"/>
                 <!--button for collapse-->
-                <androidx.appcompat.widget.AppCompatButton
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="hide_switch"/>
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-            <androidx.appcompat.widget.SwitchCompat
+            </LinearLayout>
+            <Switch
+                android:visibility="gone"
+                android:id="@+id/collapse_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="push notification to notice"
+                android:text="학습 장려 알림"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="10dp"/>
-            <androidx.appcompat.widget.SwitchCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="push notification for today's words"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="10dp"/>
-            <androidx.appcompat.widget.SwitchCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="push notification to encourage study"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="10dp"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

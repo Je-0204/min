@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +36,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-public class SettingsMain extends AppCompatActivity {
+ public class SettingsMain extends AppCompatActivity {
 
     Button btn_logout_dialog;
     Button btn_allow_logout;
@@ -82,22 +85,58 @@ public class SettingsMain extends AppCompatActivity {
         btn_logout_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.signOut();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsMain.this);
 
-                Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
-                startActivity(intent);
-                finish();
+                builder.setTitle("min").setMessage("로그아웃 하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        auth.signOut();
+                        Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "로그아웃되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "취소되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 
         btn_withdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.getCurrentUser().delete();
 
-                Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
-                startActivity(intent);
-                finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(SettingsMain.this);
+
+                builder.setTitle("min").setMessage("회원 탈퇴하시겠습니까?");
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        auth.getCurrentUser().delete();
+                        Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "회원 탈퇴되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "취소되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
@@ -118,28 +157,32 @@ public class SettingsMain extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void manage_shared_vocabulary(View view) {
-        //goto manage_shared_vocabulary
-        Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.example.min", "com.example.min.SettingsManageSharedVocabulary");
-        intent.setComponent(componentName);
-        startActivity(intent);
-    }
+//    public void manage_shared_vocabulary(View view) {
+//        //goto manage_shared_vocabulary
+//        Intent intent = new Intent();
+//        ComponentName componentName = new ComponentName("com.example.min", "com.example.min.SettingsManageSharedVocabulary");
+//        intent.setComponent(componentName);
+//        startActivity(intent);
+//    }
+//
+//    public void manage_themes(View view) {
+//        //goto manage_themes
+//        Intent intent = new Intent();
+//        ComponentName componentName = new ComponentName("com.example.min", "com.example.min.SettingsManageThemes");
+//        intent.setComponent(componentName);
+//        startActivity(intent);
+//    }
 
-    public void manage_themes(View view) {
-        //goto manage_themes
-        Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.example.min", "com.example.min.SettingsManageThemes");
-        intent.setComponent(componentName);
-        startActivity(intent);
-    }
-
-    //logout
-    public void logout(View view) {
-        AlertDialog.Builder ad = new AlertDialog.Builder(SettingsMain.this);
-        ad.setIcon(R.mipmap.ic_launcher);
-        ad.setTitle("제목");
-        ad.setMessage("홍드로이드");
-    }
-    //account withdrawl
+     public void hide_statistical_data(View view){
+        TableLayout table = findViewById(R.id.statistical_data);
+        View bar = findViewById(R.id.bar_under_statistical_data);
+        if(table.getVisibility() == view.GONE){
+            table.setVisibility(view.VISIBLE);
+            bar.setVisibility(view.VISIBLE);
+        }
+        else{
+            table.setVisibility(view.GONE);
+            bar.setVisibility(view.GONE);
+        }
+     }
 }
