@@ -10,10 +10,13 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -48,6 +51,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
     private TextView user_name;
     private TextView affiliation;
 
+    private ImageView profile_image;
+    private final String imgName = "osz.png";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
         btn_withdrawal = findViewById(R.id.withdrawal);
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        profile_image = findViewById(R.id.profile_image);
+
+        try {
+            String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
+            Bitmap bm = BitmapFactory.decodeFile(imgpath);
+            profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
+            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
+        }
 
         /*DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

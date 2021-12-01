@@ -27,7 +27,6 @@ public class SettingDictionary extends AppCompatActivity {
         setContentView(R.layout.activity_setting_dictionary);
         intent=new Intent();
     }
-
     public void yellow(View view){
         putExtraColorValue="YELLOW";
         Toast.makeText(SettingDictionary.this, putExtraColorValue, Toast.LENGTH_SHORT).show();
