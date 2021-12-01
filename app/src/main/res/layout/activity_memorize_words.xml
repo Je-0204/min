@@ -30,14 +30,14 @@
 
         </RelativeLayout>
 
-        <!--probelm-->
+        <!--question-->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8">
 
             <TextView
-                android:id="@+id/problem"
+                android:id="@+id/textview_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -48,48 +48,45 @@
     </LinearLayout>
 
     <!--multiple choice-->
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:padding="10dp"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/multiple_choice_0"
+        <RadioButton
+            android:id="@+id/radiobtn1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="2dp"
-            android:clickable="true"
-            android:onClick="onClickMultipleChoice0">
-        </Button>
-        <Button
-            android:id="@+id/multiple_choice_1"
+            android:text="Option1">
+        </RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="2dp"
-            android:clickable="true"
-            android:onClick="onClickMultipleChoice1">
-        </Button>
-        <Button
-            android:id="@+id/multiple_choice_2"
+            android:text="Option2">
+        </RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="2dp"
-            android:clickable="true"
-            android:onClick="onClickMultipleChoice2">
-        </Button>
-        <Button
-            android:id="@+id/multiple_choice_3"
+            android:text="Option3">
+        </RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="2dp"
-            android:clickable="true"
-            android:onClick="onClickMultipleChoice3">
-        </Button>
+            android:text="Option4">
+        </RadioButton>
 
         <!-- select button-->
         <LinearLayout
@@ -97,11 +94,12 @@
             android:layout_height="wrap_content"
             android:gravity="right">
             <Button
+                android:id="@+id/btn_confirm_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="선택"
                 android:clickable="true"
                 android:onClick="onClickSelect"/>
         </LinearLayout>
-    </LinearLayout>
+    </RadioGroup>
 </LinearLayout>
