@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -89,32 +90,33 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
     }
 
     public void apply_modification(View view){
-        Toast.makeText(getApplicationContext(), "변경되었습니다.",Toast.LENGTH_SHORT).show();
 
-        /* 현민님께서 에러 고쳐주셔야 하는 부분*/
-//        String name = change_name.getText().toString();
-//        String affiliation = change_affiliation.getText().toString();
-//
-//        UserAccount account = new UserAccount();
-//        account.setName(name);
-//        account.setAffiliation(affiliation);
-//
-//        DocumentReference updateRef = db.collection("UserInfo").document(account.getIdToken());
-//
-//        updateRef
-//                .update("Name", account.getName(), "Affiliation", account.getAffiliation())
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Log.d(TAG, "DocumentSnapshot successfully updated!");
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(TAG, "Error Updating document", e);
-//                    }
-//                });
+        String name = change_name.getText().toString();
+        String affiliation = change_affiliation.getText().toString();
+
+        UserAccount account = new UserAccount();
+        account.setName(name);
+        account.setAffiliation(affiliation);
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        DocumentReference updateRef = db.collection("UserInfo").document(firebaseUser.getUid());
+
+        updateRef
+                .update("Name", account.getName(), "Affiliation", account.getAffiliation())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error Updating document", e);
+                    }
+                });
+
+        Toast.makeText(getApplicationContext(), "변경되었습니다.",Toast.LENGTH_SHORT).show();
 
         saveBitmapToJpeg(imgBitmap);
     }
@@ -133,7 +135,8 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
 
             ContentResolver resolver = getContentResolver();
@@ -142,7 +145,7 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
                 imgBitmap = BitmapFactory.decodeStream(inputStream);
                 profile_image.setImageBitmap(imgBitmap);
                 inputStream.close();
-            } catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
             }
 

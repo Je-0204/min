@@ -1,5 +1,7 @@
 package com.example.min;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -76,6 +79,129 @@ public class MemorizeWords extends AppCompatActivity {
         textColorDefault = rb1.getTextColors();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
+        questionList = new List<Question>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(@Nullable Object o) {
+                return false;
+            }
+
+            @NonNull
+            @Override
+            public Iterator<Question> iterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @NonNull
+            @Override
+            public <T> T[] toArray(@NonNull T[] ts) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Question question) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(@Nullable Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(@NonNull Collection<? extends Question> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int i, @NonNull Collection<? extends Question> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(@NonNull Collection<?> collection) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Question get(int i) {
+                return null;
+            }
+
+            @Override
+            public Question set(int i, Question question) {
+                return null;
+            }
+
+            @Override
+            public void add(int i, Question question) {
+
+            }
+
+            @Override
+            public Question remove(int i) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(@Nullable Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(@Nullable Object o) {
+                return 0;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<Question> listIterator() {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public ListIterator<Question> listIterator(int i) {
+                return null;
+            }
+
+            @NonNull
+            @Override
+            public List<Question> subList(int i, int i1) {
+                return null;
+            }
+        };
+
         if(vocabulary == 1) {
             DatabaseReference dbRef = db.getReference("CSAT");
             dbRef.addValueEventListener(new ValueEventListener() {
@@ -88,9 +214,10 @@ public class MemorizeWords extends AppCompatActivity {
                         voca.setOption2(dataSnapshot.child("option2").getValue().toString());
                         voca.setOption3(dataSnapshot.child("option3").getValue().toString());
                         voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
                         questionList.add(voca);
                     }
+                    Log.d(TAG, "Data load success");
                 }
 
                 @Override
@@ -113,7 +240,7 @@ public class MemorizeWords extends AppCompatActivity {
                         voca.setOption2(dataSnapshot.child("option2").getValue().toString());
                         voca.setOption3(dataSnapshot.child("option3").getValue().toString());
                         voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
                         questionList.add(voca);
                     }
                 }
@@ -138,7 +265,7 @@ public class MemorizeWords extends AppCompatActivity {
                         voca.setOption2(dataSnapshot.child("option2").getValue().toString());
                         voca.setOption3(dataSnapshot.child("option3").getValue().toString());
                         voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
                         questionList.add(voca);
                     }
                 }
@@ -163,7 +290,7 @@ public class MemorizeWords extends AppCompatActivity {
                         voca.setOption2(dataSnapshot.child("option2").getValue().toString());
                         voca.setOption3(dataSnapshot.child("option3").getValue().toString());
                         voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
                         questionList.add(voca);
                     }
                 }
@@ -188,7 +315,7 @@ public class MemorizeWords extends AppCompatActivity {
                         voca.setOption2(dataSnapshot.child("option2").getValue().toString());
                         voca.setOption3(dataSnapshot.child("option3").getValue().toString());
                         voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
                         questionList.add(voca);
                     }
                 }
@@ -201,6 +328,7 @@ public class MemorizeWords extends AppCompatActivity {
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
         }
+
         showNextQuestion();
 
         buttonConfirmNext.setOnClickListener(new View.OnClickListener(){
