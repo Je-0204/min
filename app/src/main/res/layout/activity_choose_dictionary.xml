@@ -39,6 +39,20 @@
             android:textSize="20dp"
             android:layout_marginTop="10dp"></RadioButton>
         <RadioButton
+            android:id="@+id/radiobtn5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min 토플 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <RadioButton
+            android:id="@+id/radiobtn6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min 텝스 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <RadioButton
             android:id="@+id/radiobtn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
