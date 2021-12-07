@@ -29,6 +29,7 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@id/profile_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/user_name"
@@ -48,7 +49,9 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="6"
-            android:text="modify user profile"/>
+            android:text="프로필 변경"
+            android:clickable="true"
+            android:onClick="modify_user_profile"/>
 
         <Button
             android:layout_width="0dp"
@@ -56,7 +59,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="hide_statistical_data"/>
     </LinearLayout>
 
     <!--horizontal line-->
@@ -68,6 +73,7 @@
 
     <!--statistics-->
     <TableLayout
+        android:id="@+id/statistical_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
@@ -79,21 +85,21 @@
                android:layout_weight="1"
                android:layout_height="wrap_content"
                android:gravity="center"
-               android:text="Vocabulary"/>
+               android:text="단어장"/>
 
             <TextView
                android:layout_width="0dp"
                android:layout_weight="1"
                android:layout_height="wrap_content"
                android:gravity="center"
-               android:text="memorized words"/>
+               android:text="외운 단어"/>
 
             <TextView
                android:layout_width="0dp"
                android:layout_weight="1"
                android:layout_height="wrap_content"
                android:gravity="center"
-               android:text="continues study"/>
+               android:text="연속 출석"/>
         </TableRow>
         <TableRow
             android:layout_marginBottom="10dp">
@@ -122,6 +128,7 @@
 
     <!--horizontal line-->
     <View
+        android:id="@+id/bar_under_statistical_data"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="10dp"
@@ -138,26 +145,34 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Manage push notification"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Manage shared vocabulary"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Manage Themes"/>
+            android:text="푸쉬알림 관리"
+            android:clickable="true"
+            android:onClick="manage_push_notification"/>
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Manage shared vocabulary"-->
+<!--            android:clickable="true"-->
+<!--            android:onClick="manage_shared_vocabulary"/>-->
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Manage Themes"/>-->
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="logout"/>
+            android:text="로그아웃"
+            android:clickable="true"
+            android:onClick="logout"/>
         <Button
             android:id="@+id/withdrawal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#ff0f0f"
-            android:text="account withdrawal"/>
+            android:text="계정 탈퇴"
+            android:clickable="true"
+            android:onClick="account_withdrawal"/>
     </LinearLayout>
 </LinearLayout>
 

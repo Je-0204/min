@@ -1,207 +1,291 @@
 package com.example.min;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+
 public class MemorizeWords extends AppCompatActivity {
-    //progress count in java
-    int count;
-    String solution;
-    int index_of_solution;
-    //record either multiple_choice[i] is clicked or not
-    boolean[] isClicked;
+    private TextView textViewQuestion;
+    private TextView textViewQuestionCount;
+    private RadioGroup rbGroup;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private RadioButton rb3;
+    private RadioButton rb4;
+    private Button buttonConfirmNext;
 
-    //control objects in xml file
-    TextView progress_count;
-    TextView problem;
-    Button[] multiple_choice;
+    private ColorStateList textColorDefault;
 
-    //temporary data
-    String[] problems = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"};
-    String[] solutions = {"하나", "둘", "셋", "넷", "다섯", "여섯", "일곱", "여덞", "아홉", "열"};
-    boolean[] isUsedSolutions;
-    String[] wrong_solutions = {"사자", "호랑이", "원숭이", "코기리", "개", "고양이", "하마", "기린", "염소", "소"};
+    private List<Question> questionList;
+    private int questionCounter;
+    private int questionCountTotal;
+    private Question currentQuestion;
 
+    private boolean answered;
+
+    public static int vocabulary;
+
+    public static void set_vocabulary(int voca) {
+        vocabulary = voca;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //initial settings
-        count = 0;
-        for(int i = 0; i < 4; ++i) {
-            isClicked[i] = false;
-        }
-        for (int i = 0; i < 10; ++i) {
-            isUsedSolutions[i] = false;
-        }
-        solution = solutions[count];
-
-        progress_count = findViewById(R.id.progress_count);
-        problem = findViewById(R.id.problem);
-        multiple_choice[0] = findViewById(R.id.multiple_choice_0);
-        multiple_choice[1] = findViewById(R.id.multiple_choice_1);
-        multiple_choice[2] = findViewById(R.id.multiple_choice_2);
-        multiple_choice[3] = findViewById(R.id.multiple_choice_3);
-
-        //count == 0 일때
-        progress_count.setText((count+1) + " / 10");
-        problem.setText(problems[count]);
-
-        //multiple choice 에서 어떤 버튼이 정답을 표시할지 랜덤하게 결정
-        index_of_solution = (int)(Math.random() * 10) % 4;
-
-        for(int i = 0; i < 4; ++i) {
-            if(i == index_of_solution) {
-                multiple_choice[i].setText(solution);
-            }
-            else {
-                int randomIndex = (int)(Math.random() * 10) % 10;
-
-                while(isUsedSolutions[randomIndex]) {
-                    randomIndex = (int)(Math.random() * 10) % 10;
-                }
-
-                isUsedSolutions[randomIndex] = true;
-                multiple_choice[i].setText(wrong_solutions[i]);
-            }
-        }
         setContentView(R.layout.activity_memorize_words);
-    }
 
-    public void onClickMultipleChoice0(){
-        if(isClicked[0]) {
-            multiple_choice[0].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-            isClicked[0] = false;
-        }
-        else {
-            multiple_choice[0].setBackgroundColor(getResources().getColor(R.color.design_default_color_primary_variant));
-            isClicked[0] = true;
-        }
+        textViewQuestion = findViewById(R.id.textview_question);
+        textViewQuestionCount = findViewById(R.id.progress_count);
+        rbGroup = findViewById(R.id.radioGroup);
+        rb1 = findViewById(R.id.radiobtn1);
+        rb2 = findViewById(R.id.radiobtn2);
+        rb3 = findViewById(R.id.radiobtn3);
+        rb4 = findViewById(R.id.radiobtn4);
+        buttonConfirmNext = findViewById(R.id.btn_confirm_next);
 
-        multiple_choice[1].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[1] = false;
-        multiple_choice[2].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[2] = false;
-        multiple_choice[3].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[3] = false;
-    }
-    public void onClickMultipleChoice1(){
-        if(isClicked[1]) {
-            multiple_choice[1].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-            isClicked[1] = false;
-        }
-        else {
-            multiple_choice[1].setBackgroundColor(getResources().getColor(R.color.design_default_color_primary_variant));
-            isClicked[1] = true;
-        }
+        textColorDefault = rb1.getTextColors();
 
-        multiple_choice[0].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[0] = false;
-        multiple_choice[2].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[2] = false;
-        multiple_choice[3].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[3] = false;
-    }
-    public void onClickMultipleChoice2(View view){
-        if(isClicked[2]) {
-            multiple_choice[1].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-            isClicked[2] = false;
-        }
-        else {
-            multiple_choice[2].setBackgroundColor(getResources().getColor(R.color.design_default_color_primary_variant));
-            isClicked[2] = true;
-        }
-
-        multiple_choice[0].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[0] = false;
-        multiple_choice[1].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[1] = false;
-        multiple_choice[3].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[3] = false;
-    }
-    public void onClickMultipleChoice3(View view){
-        if(isClicked[3]) {
-            multiple_choice[3].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-            isClicked[3] = false;
-        }
-        else {
-            multiple_choice[3].setBackgroundColor(getResources().getColor(R.color.design_default_color_primary_variant));
-            isClicked[3] = true;
-        }
-
-        multiple_choice[0].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[0] = false;
-        multiple_choice[1].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[1] = false;
-        multiple_choice[2].setBackgroundColor(getResources().getColor(R.color.design_default_color_background));
-        isClicked[2] = false;
-    }
-    public void onClickSelect(View view){
-        Button b = (Button)view;
-
-        if(b.getText() == "선택"){
-            b.setText("다음");
-
-            if(isClicked[index_of_solution]) {
-                multiple_choice[index_of_solution].setBackgroundColor(getResources().getColor(R.color.design_default_color_secondary_variant));
-            }
-            else {
-                multiple_choice[index_of_solution].setBackgroundColor(getResources().getColor(R.color.design_default_color_error));
-            }
-        }
-        else{
-            //10문제가 모두 끝나
-            if(count == 9){
-                Intent intent = new Intent();
-                ComponentName componentName = new ComponentName("com.example.min", "com.example.min.ClickDictionary");
-                intent.setComponent(componentName);
-                startActivity(intent);
-            }
-            else {
-                b.setText("선택");
-                count += 1;
-
-                for(int i = 0; i < 4; ++i) {
-                    isClicked[i] = false;
-                    //multiple_choice[i].setBackground(getResources().getColor(R.color.design_default_color_background));
-                }
-                for (int i = 0; i < 10; ++i) {
-                    isUsedSolutions[i] = false;
-                }
-
-                solution = solutions[count];
-
-                progress_count.setText((count+1) + " / 10");
-                problem.setText(problems[count]);
-
-                //multiple choice 에서 어떤 버튼이 정답을 표시할지 랜덤하게 결정
-                index_of_solution = (int)(Math.random() * 10) % 4;
-
-                for(int i = 0; i < 4; ++i) {
-                    if(i == index_of_solution) {
-                        multiple_choice[i].setText(solution);
-                    }
-                    else {
-                        int randomIndex = (int)(Math.random() * 10) % 10;
-
-                        while(isUsedSolutions[randomIndex]) {
-                            randomIndex = (int)(Math.random() * 10) % 10;
-                        }
-
-                        isUsedSolutions[randomIndex] = true;
-                        multiple_choice[i].setText(wrong_solutions[i]);
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        if(vocabulary == 1) {
+            DatabaseReference dbRef = db.getReference("CSAT");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
                     }
                 }
-            }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
         }
+        else if(vocabulary == 2) {
+            DatabaseReference dbRef = db.getReference("TOEIC");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 3) {
+            DatabaseReference dbRef = db.getReference("TOEFL");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 4) {
+            DatabaseReference dbRef = db.getReference("EleMid");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 5) {
+            DatabaseReference dbRef = db.getReference("TEPS");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        showNextQuestion();
+
+        buttonConfirmNext.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if(!answered) {
+                    if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
+                        checkAnswer();
+                    } else {
+                        Toast.makeText(MemorizeWords.this, "Please select an answer", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    showNextQuestion();
+                }
+            }
+        });
+    }
+
+    private void showNextQuestion() {
+        rb1.setTextColor(textColorDefault);
+        rb2.setTextColor(textColorDefault);
+        rb3.setTextColor(textColorDefault);
+        rb4.setTextColor(textColorDefault);
+        rbGroup.clearCheck();
+
+        if(questionCounter < questionCountTotal) {
+            currentQuestion = questionList.get(questionCounter);
+
+            textViewQuestion.setText(currentQuestion.getQuestion());
+            rb1.setText(currentQuestion.getOption1());
+            rb2.setText(currentQuestion.getOption1());
+            rb3.setText(currentQuestion.getOption1());
+            rb4.setText(currentQuestion.getOption1());
+
+            questionCounter++;
+            textViewQuestionCount.setText(questionCounter + "/" + questionCountTotal);
+            answered = false;
+            buttonConfirmNext.setText("선택");
+        } else {
+            finishQuiz();
+        }
+    }
+
+    private void checkAnswer() {
+        answered = true;
+
+        RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
+        int answerNr = rbGroup.indexOfChild(rbSelected) + 1;
+
+        showSolution();
+    }
+
+    private void showSolution() {
+        rb1.setTextColor(Color.RED);
+        rb2.setTextColor(Color.RED);
+        rb3.setTextColor(Color.RED);
+        rb4.setTextColor(Color.RED);
+
+        switch (currentQuestion.getAnswerNr()) {
+            case 1:
+                rb1.setTextColor(Color.GREEN);
+                textViewQuestionCount.setText("Answer 1 is correct");
+                break;
+            case 2:
+                rb2.setTextColor(Color.GREEN);
+                textViewQuestionCount.setText("Answer 2 is correct");
+                break;
+            case 3:
+                rb3.setTextColor(Color.GREEN);
+                textViewQuestionCount.setText("Answer 3 is correct");
+                break;
+            case 4:
+                rb4.setTextColor(Color.GREEN);
+                textViewQuestionCount.setText("Answer 4 is correct");
+                break;
+        }
+
+        if (questionCounter < questionCountTotal) {
+            buttonConfirmNext.setText("다음");
+        }else {
+            buttonConfirmNext.setText("끝");
+        }
+    }
+
+    private void finishQuiz() {
+        finish();
     }
 }

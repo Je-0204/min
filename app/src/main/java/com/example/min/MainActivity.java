@@ -24,7 +24,11 @@ import android.app.ActivityGroup;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -87,6 +91,15 @@ public class MainActivity extends ActivityGroup {
     static ArrayList<String> items;
     static Context context;
 
+    private ImageView profile_image;
+    private final String imgName = "osz.png";
+
+    public int CSAT = 1;
+    public int TOEIC = 2;
+    public int TOEFL = 3;
+    public int EleMid = 4;
+    public int TEPS = 5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +114,21 @@ public class MainActivity extends ActivityGroup {
         username = findViewById(R.id.username);
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
-        /*DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        profile_image = findViewById(R.id.profile_image);
+
+        try {
+            String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
+            Bitmap bm = BitmapFactory.decodeFile(imgpath);
+            profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
+//            profile_image.setBackground(new ShapeDrawable(new OvalShape()));
+//            profile_image.setClipToOutline(true);
+            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
+        }
+
+
+        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -117,7 +144,7 @@ public class MainActivity extends ActivityGroup {
                     Log.d(TAG, "get failed with", task.getException());
                 }
             }
-        });*/
+        });
 
         /*TabHost tabHost=findViewById(R.id.host);
         tabHost.setup();
@@ -178,10 +205,12 @@ public class MainActivity extends ActivityGroup {
 
             }else if (resultCode==2) {  //min 수능 단어장 추가
                 text="min 수능 단어장";
+                MemorizeWords.set_vocabulary(CSAT);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==3) {  //min 토익 단어장 추가
                 text="min 토익 단어장";
+                MemorizeWords.set_vocabulary(TOEIC);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==4) {  //공유된 단어장 추가

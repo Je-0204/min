@@ -15,12 +15,14 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="back_to_settings_main"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
-            android:text="개인 정보 변"
+            android:text="개인 정보 변경"
             android:textSize="20dp"/>
     </LinearLayout>
 
@@ -66,7 +68,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"/>
+                android:text="이름"/>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/change_name"
                 android:layout_width="match_parent"
@@ -77,7 +79,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Affiliation"/>
+                android:text="소속"/>
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/change_affiliation"
                 android:layout_width="match_parent"
@@ -96,11 +98,15 @@
                     android:id="@+id/apply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="apply"/>
+                    android:text="확인"
+                    android:clickable="true"
+                    android:onClick="apply_modification"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="cancel"/>
+                    android:text="취소"
+                    android:clickable="true"
+                    android:onClick="cancel_modification"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </LinearLayout>

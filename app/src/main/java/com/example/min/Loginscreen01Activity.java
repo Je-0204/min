@@ -22,10 +22,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Loginscreen01Activity extends AppCompatActivity {
 
-    int visitDay=0;
     private EditText etId, etPassword;
     private FirebaseAuth auth;
-    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,6 @@ public class Loginscreen01Activity extends AppCompatActivity {
         signup.setPaintFlags(signup.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         auth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
 
         etId = findViewById(R.id.login_id);
         etPassword = findViewById(R.id.login_password);
@@ -53,12 +50,10 @@ public class Loginscreen01Activity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) { // 로그인 성공
-                                    visitDay++;
 
                                     Intent intent=new Intent();
                                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.MainActivity");
                                     intent.setComponent(componentName);
-                                    intent.putExtra("visitDay",visitDay);
                                     startActivity(intent);
                                     finish();
                                 } else { // 로그인 실패
@@ -80,9 +75,5 @@ public class Loginscreen01Activity extends AppCompatActivity {
         ComponentName componentName=new ComponentName("com.example.min","com.example.min.signupscreen01");
         intent.setComponent(componentName);
         startActivity(intent);
-    }
-    public void google(View view){
-        Toast.makeText(this.getApplicationContext(), "google으로 로그인", Toast.LENGTH_SHORT).show();
-        //goto google login screen activity
     }
 }

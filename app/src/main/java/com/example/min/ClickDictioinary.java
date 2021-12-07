@@ -141,7 +141,10 @@ public class ClickDictioinary extends AppCompatActivity {
 
     }
     public void memorize(View view){
-
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
+        intent.setComponent(componentName);
+        startActivity(intent);
     }
     public void review(View view){
 

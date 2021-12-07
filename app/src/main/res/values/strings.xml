@@ -24,8 +24,10 @@
     </string-array>
     <string-array name="dictionary">
         <item>수능 단어 암기</item>
-        <item>토익 단어 암기</item>
-        <item>공무원 단어 암기</item>
+        <item>초중 필수 단어 암기</item>
+        <item>TOEIC 단어 암기</item>
+        <item>TOEFL 단어 암기</item>
+        <item>TEPS 단어 암기</item>
         <item>기타</item>
     </string-array>
     <string name="congratulation">회원가입이\n완료되었습니다!</string>
