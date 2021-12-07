@@ -217,10 +217,12 @@ public class MainActivity extends ActivityGroup {
                 text="공유된 단어장";
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==5) {  //토플 단어장 추가
-                text="min 토플 단어장";
+                text="min TOEFL 단어장";
+                MemorizeWords.set_vocabulary(TOEFL);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==6) {  //텝스 단어장 추가
-                text="min 텝스 단어장";
+                text="min TEPS 단어장";
+                MemorizeWords.set_vocabulary(TEPS);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==-1) {  //취소버튼(단어장추가안해)
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
