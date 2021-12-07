@@ -1,5 +1,7 @@
 package com.example.min;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ComponentName;
@@ -14,11 +16,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.w3c.dom.Text;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 public class MemorizeWords extends AppCompatActivity {
     private TextView textViewQuestion;
@@ -39,6 +53,12 @@ public class MemorizeWords extends AppCompatActivity {
 
     private boolean answered;
 
+    public static int vocabulary;
+
+    public static void set_vocabulary(int voca) {
+        vocabulary = voca;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,11 +75,132 @@ public class MemorizeWords extends AppCompatActivity {
 
         textColorDefault = rb1.getTextColors();
 
-        QuizDbHelper dbHelper = new QuizDbHelper(this);
-        questionList = dbHelper.getAllQuestions();
-        questionCountTotal = questionList.size();
-        Collections.shuffle(questionList);
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        if(vocabulary == 1) {
+            DatabaseReference dbRef = db.getReference("CSAT");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 2) {
+            DatabaseReference dbRef = db.getReference("TOEIC");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 3) {
+            DatabaseReference dbRef = db.getReference("TOEFL");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 4) {
+            DatabaseReference dbRef = db.getReference("EleMid");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
+        else if(vocabulary == 5) {
+            DatabaseReference dbRef = db.getReference("TEPS");
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Question voca = new Question();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        voca.setQuestion(dataSnapshot.getKey());
+                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
+                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
+                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
+                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
+                        voca.setAnswerNr((Integer)dataSnapshot.child("answer_nr").getValue());
+                        questionList.add(voca);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            questionCountTotal = questionList.size();
+            Collections.shuffle(questionList);
+        }
         showNextQuestion();
 
         buttonConfirmNext.setOnClickListener(new View.OnClickListener(){

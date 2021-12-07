@@ -94,6 +94,12 @@ public class MainActivity extends ActivityGroup {
     private ImageView profile_image;
     private final String imgName = "osz.png";
 
+    public int CSAT = 1;
+    public int TOEIC = 2;
+    public int TOEFL = 3;
+    public int EleMid = 4;
+    public int TEPS = 5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +128,7 @@ public class MainActivity extends ActivityGroup {
         }
 
 
-        /*DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -138,7 +144,7 @@ public class MainActivity extends ActivityGroup {
                     Log.d(TAG, "get failed with", task.getException());
                 }
             }
-        });*/
+        });
 
         /*TabHost tabHost=findViewById(R.id.host);
         tabHost.setup();
@@ -199,10 +205,12 @@ public class MainActivity extends ActivityGroup {
 
             }else if (resultCode==2) {  //min 수능 단어장 추가
                 text="min 수능 단어장";
+                MemorizeWords.set_vocabulary(CSAT);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==3) {  //min 토익 단어장 추가
                 text="min 토익 단어장";
+                MemorizeWords.set_vocabulary(TOEIC);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==4) {  //공유된 단어장 추가

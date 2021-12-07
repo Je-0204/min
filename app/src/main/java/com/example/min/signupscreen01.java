@@ -39,18 +39,16 @@ public class signupscreen01 extends AppCompatActivity {
 
     String selectedJob;
     String selectedDic;
-    String affiliation;
-    EditText et_affiliation;
+    TextView et_affiliation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signupscreen01);
 
-        et_affiliation = findViewById(R.id.set_affiliation);
-        affiliation = et_affiliation.getText().toString();
         spinnerJob = findViewById(R.id.spinner_job);
         spinnerDic = findViewById(R.id.spinner_dic);
+        et_affiliation = findViewById(R.id.set_affiliation);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(signupscreen01.this, R.array.job, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,7 +86,7 @@ public class signupscreen01 extends AppCompatActivity {
         intent.setComponent(componentName);
         intent.putExtra("Job",selectedJob);
         intent.putExtra("Dic",selectedDic);
-        intent.putExtra("Affiliation", affiliation);
+        intent.putExtra("Affiliation", et_affiliation.getText().toString());
         startActivity(intent);
     }
 }
