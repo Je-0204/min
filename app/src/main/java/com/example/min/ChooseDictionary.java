@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class ChooseDictionary extends AppCompatActivity {
     private RadioGroup radioGroup;
-    private RadioButton radiobtn1,radiobtn2,radiobtn3,radiobtn4,radiobtn5,radiobtn6;
+    private RadioButton radiobtn1,radiobtn2,radiobtn3,radiobtn4,radiobtn5,radiobtn6,radiobtn7;
     private EditText editTextForBtn4;
     private int chooseDic;  //선택한 단어장 정보 리턴
 
@@ -29,8 +29,9 @@ public class ChooseDictionary extends AppCompatActivity {
         radiobtn2=findViewById(R.id.radiobtn2);
         radiobtn3=findViewById(R.id.radiobtn3);
         radiobtn4=findViewById(R.id.radiobtn4);
-        radiobtn3=findViewById(R.id.radiobtn5);
-        radiobtn4=findViewById(R.id.radiobtn6);
+        radiobtn5=findViewById(R.id.radiobtn5);
+        radiobtn6=findViewById(R.id.radiobtn6);
+        radiobtn7=findViewById(R.id.radiobtn7);
         editTextForBtn4=findViewById(R.id.editTextForSharingDic);
 
         radioGroup=findViewById(R.id.radioGroup);
@@ -81,6 +82,11 @@ public class ChooseDictionary extends AppCompatActivity {
              editTextForBtn4.setEnabled(false);
              //Toast.makeText(ChooseDictionary.this, "min 텝스 단어장", Toast.LENGTH_SHORT).show();
              chooseDic=6;
+         }
+         else if(i == R.id.radiobtn7){
+             editTextForBtn4.setEnabled(false);
+             //Toast.makeText(ChooseDictionary.this, "min 초중필수 단어장", Toast.LENGTH_SHORT).show();
+             chooseDic=7;
          }
      }
     };

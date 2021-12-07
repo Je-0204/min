@@ -53,6 +53,13 @@
             android:textSize="20dp"
             android:layout_marginTop="10dp"></RadioButton>
         <RadioButton
+            android:id="@+id/radiobtn7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="min 초/중 필수 단어장"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"></RadioButton>
+        <RadioButton
             android:id="@+id/radiobtn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
