@@ -226,6 +226,7 @@ public class MainActivity extends ActivityGroup {
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==7) {  //텝스 단어장 추가
                 text="min 초/중 필수 단어장";
+                MemorizeWords.set_vocabulary(EleMid);
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==-1) {  //취소버튼(단어장추가안해)
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
