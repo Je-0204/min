@@ -11,7 +11,5 @@ public class Notification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-
-        ListView listView = findViewById(R.id.notification_list);
     }
 }

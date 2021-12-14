@@ -1,18 +1,16 @@
 //https://www.youtube.com/watch?v=plnLs6aST1M - 단어장 수정 dialog
 package com.example.min;
 
-import static android.service.controls.ControlsProviderService.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +43,8 @@ public class ClickDictioinary extends AppCompatActivity {
     ArrayList<String> itemMeanings;
     ArrayList<String> itemMeanings2;
     public int voca;
-    private ArrayList<Question> questionList;
+    private ArrayList<Question> questionList0;
+    private ArrayList<Question> questionList1;
 
 
     @Override
@@ -66,7 +65,8 @@ public class ClickDictioinary extends AppCompatActivity {
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        questionList = new ArrayList<>();
+        questionList0 = new ArrayList<>();
+        questionList1 = new ArrayList<>();
 
         if(voca == 1) {
             DatabaseReference dbRef = db.getReference("CSAT");
@@ -84,11 +84,12 @@ public class ClickDictioinary extends AppCompatActivity {
                         if(dataSnapshot.child("is_memorized").getValue().toString().equals("0")) {
                             items.add(dataSnapshot.getKey());
                             itemMeanings.add(dataSnapshot.child("뜻").getValue().toString());
-                            questionList.add(vocab);
+                            questionList0.add(vocab);
                         }
                         else if(dataSnapshot.child("is_memorized").getValue().toString().equals("1")) {
                             items2.add(dataSnapshot.getKey());
                             itemMeanings2.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList1.add(vocab);
                         }
                     }
                     Log.d(TAG, "Data load success");
@@ -106,7 +107,51 @@ public class ClickDictioinary extends AppCompatActivity {
                     Log.w(TAG, "Data load failed");
                 }
             });
-            Collections.shuffle(questionList);
+            Collections.shuffle(questionList0);
+            Collections.shuffle(questionList1);
+        }
+
+        if(voca == 2) {
+            DatabaseReference dbRef = db.getReference("TOEIC");
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String question = dataSnapshot.getKey();
+                        String option1 = dataSnapshot.child("option1").getValue().toString();
+                        String option2 = dataSnapshot.child("option2").getValue().toString();
+                        String option3 = dataSnapshot.child("option3").getValue().toString();
+                        String option4 = dataSnapshot.child("option4").getValue().toString();
+                        String answer_nr = dataSnapshot.child("answer_nr").getValue().toString();
+                        Question vocab = new Question(question, option1, option2, option3, option4, Integer.parseInt(answer_nr));
+                        if(dataSnapshot.child("is_memorized").getValue().toString().equals("0")) {
+                            items.add(dataSnapshot.getKey());
+                            itemMeanings.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList0.add(vocab);
+                        }
+                        else if(dataSnapshot.child("is_memorized").getValue().toString().equals("1")) {
+                            items2.add(dataSnapshot.getKey());
+                            itemMeanings2.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList1.add(vocab);
+                        }
+                    }
+                    Log.d(TAG, "Data load success");
+                    adapter = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items) ;
+                    adapter2 = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items2);
+                    // listview 생성 및 adapter 지정.
+                    listview = (ListView) findViewById(R.id.listview1);
+                    listview.setAdapter(adapter);
+                    listview2 = (ListView) findViewById(R.id.listview2);
+                    listview2.setAdapter(adapter2);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.w(TAG, "Data load failed");
+                }
+            });
+            Collections.shuffle(questionList0);
+            Collections.shuffle(questionList1);
         }
 
         TextView textView=findViewById(R.id.name);
@@ -224,12 +269,17 @@ public class ClickDictioinary extends AppCompatActivity {
         Intent intent = new Intent();
         ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
         intent.setComponent(componentName);
-        intent.putParcelableArrayListExtra("questionList", questionList);
+        intent.putParcelableArrayListExtra("questionList", questionList0);
         intent.putExtra("voca", voca);
         startActivity(intent);
     }
     public void review(View view){
-
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
+        intent.setComponent(componentName);
+        intent.putParcelableArrayListExtra("questionList", questionList1);
+        intent.putExtra("voca", voca);
+        startActivity(intent);
     }
     public int ItemColor(String color){
         switch (color){

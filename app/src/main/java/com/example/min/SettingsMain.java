@@ -40,7 +40,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
- public class SettingsMain extends AppCompatActivity {
+import com.google.firebase.firestore.FirestoreRegistrar;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+public class SettingsMain extends AppCompatActivity {
 
     Button btn_logout_dialog;
     Button btn_allow_logout;
@@ -136,7 +140,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
                         user.delete()
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -146,6 +150,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
                                         }
                                     }
                                 });
+                        db.collection("UserInfo").document(user.getUid()).delete();
+
                         Intent intent = new Intent(SettingsMain.this, Loginscreen01Activity.class);
                         startActivity(intent);
                         finish();

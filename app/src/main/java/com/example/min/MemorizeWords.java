@@ -170,6 +170,20 @@ public class MemorizeWords extends AppCompatActivity {
                     }
                 });
             }
+
+            if(voca == 2) {
+                DatabaseReference dbRef = db.getReference("TOEIC");
+                String Eng = currentQuestion.getQuestion();
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put(Eng + "/is_memorized", 1);
+                dbRef.updateChildren(map, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Log.d(TAG, "Data changed");
+                    }
+                });
+            }
+
             if(currentQuestion.getAnswerNr() == 1) {
                 rb1.setTextColor(Color.GREEN);
             }
