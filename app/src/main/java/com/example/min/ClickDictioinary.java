@@ -1,6 +1,8 @@
 //https://www.youtube.com/watch?v=plnLs6aST1M - 단어장 수정 dialog
 package com.example.min;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +21,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ClickDictioinary extends AppCompatActivity {
     private static final String TAG = "DB";
@@ -31,7 +40,10 @@ public class ClickDictioinary extends AppCompatActivity {
     ListView listview;
     //단어 뜻 저장하는 리스트, 데이터리스트와 짝꿍
     ArrayList<String> itemMeanings;
-    public String voca;
+    public int voca;
+    int count;
+    private ArrayList<Question> questionList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +52,41 @@ public class ClickDictioinary extends AppCompatActivity {
 
         Intent intent=getIntent();
         String dicName = intent.getStringExtra("dicName");
-        voca = intent.getStringExtra("voca");
+        voca = intent.getIntExtra("voca", 0);
+        count = 0;
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        questionList = new ArrayList<>();
+
+        if(voca == 1) {
+            DatabaseReference dbRef = db.getReference("CSAT");
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if(count >= 10)
+                            break;
+                        String question = dataSnapshot.getKey().toString();
+                        String option1 = dataSnapshot.child("option1").getValue().toString();
+                        String option2 = dataSnapshot.child("option2").getValue().toString();
+                        String option3 = dataSnapshot.child("option3").getValue().toString();
+                        String option4 = dataSnapshot.child("option4").getValue().toString();
+                        String answer_nr = dataSnapshot.child("answer_nr").getValue().toString();
+                        Question vocab = new Question(question, option1, option2, option3, option4, Integer.parseInt(answer_nr));
+                        questionList.add(vocab);
+                        count++;
+                    }
+                    Log.d(TAG, "Data load success");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.w(TAG, "Data load failed");
+                }
+            });
+            Collections.shuffle(questionList);
+        }
 
         TextView textView=findViewById(R.id.name);
         textView.setText(dicName);
@@ -151,7 +197,7 @@ public class ClickDictioinary extends AppCompatActivity {
         Intent intent = new Intent();
         ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
         intent.setComponent(componentName);
-        intent.putExtra("voca", voca);
+        intent.putParcelableArrayListExtra("questionList", questionList);
         startActivity(intent);
     }
     public void review(View view){

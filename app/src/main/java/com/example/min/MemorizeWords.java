@@ -52,147 +52,29 @@ public class MemorizeWords extends AppCompatActivity {
     private RadioButton rb4;
     private Button buttonConfirmNext;
 
-    private ColorStateList textColorDefault;
 
-    private List<Question> questionList = new List<Question>() {
-        @Override
-        public int size() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean contains(@Nullable Object o) {
-            return false;
-        }
-
-        @NonNull
-        @Override
-        public Iterator<Question> iterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public Object[] toArray() {
-            return new Object[0];
-        }
-
-        @NonNull
-        @Override
-        public <T> T[] toArray(@NonNull T[] ts) {
-            return null;
-        }
-
-        @Override
-        public boolean add(Question question) {
-            return false;
-        }
-
-        @Override
-        public boolean remove(@Nullable Object o) {
-            return false;
-        }
-
-        @Override
-        public boolean containsAll(@NonNull Collection<?> collection) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(@NonNull Collection<? extends Question> collection) {
-            return false;
-        }
-
-        @Override
-        public boolean addAll(int i, @NonNull Collection<? extends Question> collection) {
-            return false;
-        }
-
-        @Override
-        public boolean removeAll(@NonNull Collection<?> collection) {
-            return false;
-        }
-
-        @Override
-        public boolean retainAll(@NonNull Collection<?> collection) {
-            return false;
-        }
-
-        @Override
-        public void clear() {
-
-        }
-
-        @Override
-        public Question get(int i) {
-            return null;
-        }
-
-        @Override
-        public Question set(int i, Question question) {
-            return null;
-        }
-
-        @Override
-        public void add(int i, Question question) {
-
-        }
-
-        @Override
-        public Question remove(int i) {
-            return null;
-        }
-
-        @Override
-        public int indexOf(@Nullable Object o) {
-            return 0;
-        }
-
-        @Override
-        public int lastIndexOf(@Nullable Object o) {
-            return 0;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator<Question> listIterator() {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public ListIterator<Question> listIterator(int i) {
-            return null;
-        }
-
-        @NonNull
-        @Override
-        public List<Question> subList(int i, int i1) {
-            return null;
-        }
-    };
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
+    private ArrayList<Question> questionList;
+    private int answerNr;
+
 
     private boolean answered;
-
-    int count = 0;
-
-    public int vocabulary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_memorize_words);
+
+        questionCounter = 0;
+        currentQuestion = new Question();
 
         Intent intent = getIntent();
-        vocabulary = intent.getIntExtra("voca", 0);
+        questionList = intent.getParcelableArrayListExtra("questionList");
+        questionCountTotal = 10;
+
+        setContentView(R.layout.activity_memorize_words);
+
 
         textViewQuestion = findViewById(R.id.textview_question);
         textViewQuestionCount = findViewById(R.id.progress_count);
@@ -203,186 +85,9 @@ public class MemorizeWords extends AppCompatActivity {
         rb4 = findViewById(R.id.radiobtn4);
         buttonConfirmNext = findViewById(R.id.btn_confirm_next);
 
-        textColorDefault = rb1.getTextColors();
-
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-
-        try {
-            AdvertisingIdClient.getAdvertisingIdInfo(MemorizeWords.this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        }
-
-        if(vocabulary == 1) {
-            DatabaseReference dbRef = db.getReference("CSAT");
-            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        if(count > 10)
-                            break;
-                        String question = dataSnapshot.getKey().toString();
-                        String option1 = dataSnapshot.child("option1").getValue().toString();
-                        String option2 = dataSnapshot.child("option2").getValue().toString();
-                        String option3 = dataSnapshot.child("option3").getValue().toString();
-                        String option4 = dataSnapshot.child("option4").getValue().toString();
-                        String answer_nr = dataSnapshot.child("answer_nr").getValue().toString();
-                        Question vocab = new Question(question, option1, option2, option3, option4, Integer.parseInt(answer_nr));
-                        questionList.add(vocab);
-                        count++;
-                    }
-                    Log.d(TAG, "Data load success");
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.w(TAG, "Data load failed");
-                }
-            });
-
-            /*dbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Question vocab = new Question();
-                        String question = dataSnapshot.getKey();
-                        vocab.setQuestion(question);
-                        String option1 = dataSnapshot.child("option1").getValue().toString();
-                        vocab.setOption1(option1);
-                        String option2 = dataSnapshot.child("option2").getValue().toString();
-                        vocab.setOption2(option2);
-                        String option3 = dataSnapshot.child("option3").getValue().toString();
-                        vocab.setOption3(option3);
-                        String option4 = dataSnapshot.child("option4").getValue().toString();
-                        vocab.setOption4(option4);
-                        String answer_nr = dataSnapshot.child("answer_nr").getValue().toString();
-                        vocab.setAnswerNr(Integer.parseInt(answer_nr));
-                        vocab.setOption2(dataSnapshot.child("option2").getValue().toString());
-                        vocab.setOption3(dataSnapshot.child("option3").getValue().toString());
-                        vocab.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        vocab.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
-                        questionList.add(vocab);
-                    }
-                    Log.d(TAG, "Data load success");
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.d(TAG, "Data load failed");
-
-                }
-            });*/
-
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
-        }
-
-        /*if(vocabulary == 2) {
-            DatabaseReference dbRef = db.getReference("TOEIC");
-            dbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Question vocab = new Question();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        vocab.setQuestion(dataSnapshot.getKey());
-                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
-                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
-                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
-                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
-                        questionList.add(voca);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
-        }
-        else if(vocabulary == 3) {
-            DatabaseReference dbRef = db.getReference("TOEFL");
-            dbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Question voca = new Question();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        voca.setQuestion(dataSnapshot.getKey());
-                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
-                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
-                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
-                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
-                        questionList.add(voca);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
-        }
-        else if(vocabulary == 4) {
-            DatabaseReference dbRef = db.getReference("EleMid");
-            dbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Question voca = new Question();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        voca.setQuestion(dataSnapshot.getKey());
-                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
-                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
-                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
-                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
-                        questionList.add(voca);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
-        }
-        else if(vocabulary == 5) {
-            DatabaseReference dbRef = db.getReference("TEPS");
-            dbRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Question voca = new Question();
-                    for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        voca.setQuestion(dataSnapshot.getKey());
-                        voca.setOption1(dataSnapshot.child("option1").getValue().toString());
-                        voca.setOption2(dataSnapshot.child("option2").getValue().toString());
-                        voca.setOption3(dataSnapshot.child("option3").getValue().toString());
-                        voca.setOption4(dataSnapshot.child("option4").getValue().toString());
-                        voca.setAnswerNr(Integer.parseInt(dataSnapshot.child("answer_nr").getValue().toString()));
-                        questionList.add(voca);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
-        }*/
 
         showNextQuestion();
+
 
         buttonConfirmNext.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -401,10 +106,10 @@ public class MemorizeWords extends AppCompatActivity {
     }
 
     private void showNextQuestion() {
-        rb1.setTextColor(textColorDefault);
-        rb2.setTextColor(textColorDefault);
-        rb3.setTextColor(textColorDefault);
-        rb4.setTextColor(textColorDefault);
+        rb1.setTextColor(Color.BLACK);
+        rb2.setTextColor(Color.BLACK);
+        rb3.setTextColor(Color.BLACK);
+        rb4.setTextColor(Color.BLACK);
         rbGroup.clearCheck();
 
         if(questionCounter < questionCountTotal) {
@@ -412,9 +117,9 @@ public class MemorizeWords extends AppCompatActivity {
 
             textViewQuestion.setText(currentQuestion.getQuestion());
             rb1.setText(currentQuestion.getOption1());
-            rb2.setText(currentQuestion.getOption1());
-            rb3.setText(currentQuestion.getOption1());
-            rb4.setText(currentQuestion.getOption1());
+            rb2.setText(currentQuestion.getOption2());
+            rb3.setText(currentQuestion.getOption3());
+            rb4.setText(currentQuestion.getOption4());
 
             questionCounter++;
             textViewQuestionCount.setText(questionCounter + "/" + questionCountTotal);
@@ -425,11 +130,12 @@ public class MemorizeWords extends AppCompatActivity {
         }
     }
 
+
     private void checkAnswer() {
         answered = true;
 
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
-        int answerNr = rbGroup.indexOfChild(rbSelected) + 1;
+        answerNr = rbGroup.indexOfChild(rbSelected) + 1;
 
         showSolution();
     }
@@ -440,23 +146,33 @@ public class MemorizeWords extends AppCompatActivity {
         rb3.setTextColor(Color.RED);
         rb4.setTextColor(Color.RED);
 
-        switch (currentQuestion.getAnswerNr()) {
-            case 1:
+        if(currentQuestion.getAnswerNr() == answerNr) {
+            if(currentQuestion.getAnswerNr() == 1) {
                 rb1.setTextColor(Color.GREEN);
-                textViewQuestionCount.setText("Answer 1 is correct");
-                break;
-            case 2:
+            }
+            else if(currentQuestion.getAnswerNr() == 2) {
                 rb2.setTextColor(Color.GREEN);
-                textViewQuestionCount.setText("Answer 2 is correct");
-                break;
-            case 3:
+            }
+            else if(currentQuestion.getAnswerNr() == 3) {
                 rb3.setTextColor(Color.GREEN);
-                textViewQuestionCount.setText("Answer 3 is correct");
-                break;
-            case 4:
+            }
+            else if(currentQuestion.getAnswerNr() == 4) {
                 rb4.setTextColor(Color.GREEN);
-                textViewQuestionCount.setText("Answer 4 is correct");
-                break;
+            }
+        }
+        else {
+            if(currentQuestion.getAnswerNr() == 1) {
+                rb1.setTextColor(Color.GREEN);
+            }
+            else if(currentQuestion.getAnswerNr() == 2) {
+                rb2.setTextColor(Color.GREEN);
+            }
+            else if(currentQuestion.getAnswerNr() == 3) {
+                rb3.setTextColor(Color.GREEN);
+            }
+            else if(currentQuestion.getAnswerNr() == 4) {
+                rb4.setTextColor(Color.GREEN);
+            }
         }
 
         if (questionCounter < questionCountTotal) {
