@@ -85,11 +85,13 @@ public class MainActivity extends ActivityGroup {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private TextView username;
+    private TextView affiliation;
 
     static ListView listview;
     static ListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
+    static ArrayList<String> itemColor; //dic Color
 
     private ImageView profile_image;
     private final String imgName = "osz.png";
@@ -109,6 +111,7 @@ public class MainActivity extends ActivityGroup {
         listview = findViewById(R.id.listView1);
         items = new ArrayList<>();
         context=getApplicationContext();
+        itemColor=new ArrayList<String>();
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -116,16 +119,13 @@ public class MainActivity extends ActivityGroup {
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         profile_image = findViewById(R.id.profile_image);
+        affiliation = findViewById(R.id.affiliation);
 
         try {
             String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
-//            profile_image.setBackground(new ShapeDrawable(new OvalShape()));
-//            profile_image.setClipToOutline(true);
-            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -137,6 +137,7 @@ public class MainActivity extends ActivityGroup {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         username.setText(document.get("Name").toString());
+                        affiliation.setText(document.get("Affiliation").toString());
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -243,6 +244,7 @@ public class MainActivity extends ActivityGroup {
                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
+                    intent.putExtra("dicColor",itemColor.get(i));
                     intent.putExtra("voca", voca);
                     startActivity(intent);
                 }
@@ -260,6 +262,7 @@ public class MainActivity extends ActivityGroup {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             items.remove(position);
+                            itemColor.remove(position);
                             listview.setAdapter(adapter);
                             dialog.dismiss();
                         }
@@ -290,31 +293,39 @@ public class MainActivity extends ActivityGroup {
     }
     public static void removeItem(int remove){
         items.remove(remove);
+        itemColor.remove(remove);
         listview.setAdapter(adapter);
     }
     public static void addItem(String item){
         items.add(item);
+        itemColor.add("white");
         listview.setAdapter(adapter);
     }
     public static void changeItemColor(int change,String color){
         switch (color){
             case "YELLOW":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_yellow));
+                itemColor.set(change,color);
                 break;
             case "PINK":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_pink));
+                itemColor.set(change,color);
                 break;
             case "GREEN":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_green));
+                itemColor.set(change,color);
                 break;
             case "BLUE":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_blue));
+                itemColor.set(change,color);
                 break;
             case "PURPLE":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_purple));
+                itemColor.set(change,color);
                 break;
             case "GRAY":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_gray));
+                itemColor.set(change,color);
                 break;
         }
 
@@ -340,7 +351,6 @@ class ListViewAdapter extends ArrayAdapter<String> {
             convertView=layoutInflater.inflate(R.layout.listview_custom,null);
         }
         context=parent.getContext();
-        TextView date=convertView.findViewById(R.id.date);
 
         TextView name=convertView.findViewById(R.id.dicName);
         name.setText(list.get(position));

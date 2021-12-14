@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,11 +23,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
@@ -40,6 +45,7 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
     AppCompatEditText change_name;
     AppCompatEditText change_affiliation;
     AppCompatButton btn_apply;
+    boolean isClickChangeProfile;
 
     private final int GET_GALLERY_IMAGE = 200;
     private String imgName = "osz.png";
@@ -55,14 +61,14 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
 
         profile_image = findViewById(R.id.profile_image);
         btn_change_profile_image = findViewById(R.id.btn_change_profile_image);
+        isClickChangeProfile = false;
 
         try {
             String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
-            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
+
         }
 
         btn_change_profile_image.setOnClickListener(new View.OnClickListener() {
@@ -71,11 +77,35 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
+
+                isClickChangeProfile = true;
             }
         });
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+
+        DocumentReference docRef = db.collection("UserInfo").document(firebaseUser.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        change_name.setHint(document.get("Name").toString());
+                        change_affiliation.setHint(document.get("Affiliation").toString());
+                    }
+                    else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with", task.getException());
+                }
+            }
+        });
+
 
         change_name = findViewById(R.id.change_name);
         change_affiliation = findViewById(R.id.change_affiliation);
@@ -93,6 +123,8 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
 
         String name = change_name.getText().toString();
         String affiliation = change_affiliation.getText().toString();
+
+        saveBitmapToJpeg(imgBitmap);
 
         UserAccount account = new UserAccount();
         account.setName(name);
@@ -116,22 +148,26 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
                     }
                 });
 
-        Toast.makeText(getApplicationContext(), "변경되었습니다.",Toast.LENGTH_SHORT).show();
+        change_name.setHint(change_name.getText().toString());
+        change_affiliation.setHint(change_affiliation.getText().toString());
+        Toast.makeText(getApplicationContext(), "적용되었습니다.",Toast.LENGTH_SHORT).show();
 
-        saveBitmapToJpeg(imgBitmap);
+        change_name.setText(null);
+        change_affiliation.setText(null);
+        isClickChangeProfile = false;
     }
 
     public void cancel_modification(View view){
+
         Toast.makeText(getApplicationContext(), "취소되었습니다.",Toast.LENGTH_SHORT).show();
 
-        try {
-            String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
-            Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
-            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
-        }
+        isClickChangeProfile = false;
+        change_name.setText(null);
+        change_affiliation.setText(null);
+
+        Bitmap bitmap = BitmapFactory.decodeFile(getCacheDir() + "/" + imgName);
+        profile_image.setImageBitmap(bitmap);
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -146,15 +182,11 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
                 profile_image.setImageBitmap(imgBitmap);
                 inputStream.close();
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "파일 불러오기 실패", Toast.LENGTH_SHORT).show();
             }
-
-//            profile_image.setImageURI(selectedImageUri);
-//
-//            uri_profile_image = selectedImageUri;
         }
     }
 
+    //가져온 비트맵을 저장
     public void saveBitmapToJpeg(Bitmap bitmap) {   // 선택한 이미지 내부 저장소에 저장
         File tempFile = new File(getCacheDir(), imgName);    // 파일 경로와 이름 넣기
         try {
@@ -162,9 +194,7 @@ public class SettingsModifyUserProfile extends AppCompatActivity {
             FileOutputStream out = new FileOutputStream(tempFile);  // 파일을 쓸 수 있는 스트림을 준비하기
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);   // compress 함수를 사용해 스트림에 비트맵을 저장하기
             out.close();    // 스트림 닫아주기
-            Toast.makeText(getApplicationContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
         }
     }
 }

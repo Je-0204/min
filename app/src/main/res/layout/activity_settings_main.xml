@@ -25,16 +25,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_name"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@id/profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignTop="@id/user_name"
             android:layout_alignParentRight="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/user_profile_icon" />
     </RelativeLayout>
 
     <!-- go to modify user profile-->
@@ -45,90 +45,15 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_margin = "10dp"
             android:layout_weight="6"
             android:text="프로필 변경"
             android:clickable="true"
             android:onClick="modify_user_profile"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:onClick="hide_statistical_data"/>
     </LinearLayout>
 
     <!--horizontal line-->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="10dp"
-        android:background="@android:color/darker_gray"/>
-
-    <!--statistics-->
-    <TableLayout
-        android:id="@+id/statistical_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-        <TableRow
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp">
-            <TextView
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="wrap_content"
-               android:gravity="center"
-               android:text="단어장"/>
-
-            <TextView
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="wrap_content"
-               android:gravity="center"
-               android:text="외운 단어"/>
-
-            <TextView
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="wrap_content"
-               android:gravity="center"
-               android:text="연속 출석"/>
-        </TableRow>
-        <TableRow
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="8"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="1045"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="45"/>
-        </TableRow>
-    </TableLayout>
-
-    <!--horizontal line-->
-    <View
-        android:id="@+id/bar_under_statistical_data"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="10dp"

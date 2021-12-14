@@ -55,6 +55,7 @@ public class ClickDictioinary extends AppCompatActivity {
 
         Intent intent=getIntent();
         String dicName = intent.getStringExtra("dicName");
+        String dicColor=intent.getStringExtra("dicColor");
         voca = intent.getIntExtra("voca", 0);
 
         items = new ArrayList<String>();
@@ -110,7 +111,12 @@ public class ClickDictioinary extends AppCompatActivity {
 
         TextView textView=findViewById(R.id.name);
         textView.setText(dicName);
+        textView.setBackgroundColor(ItemColor(dicColor));//Integer.toString(value,16)
 
+        //Toast.makeText(ClickDictioinary.this,""+ItemColor(dicColor),Toast.LENGTH_SHORT).show();
+
+        // 빈 데이터 리스트 생성.
+        items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
 
         adapter = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items) ;
@@ -223,6 +229,25 @@ public class ClickDictioinary extends AppCompatActivity {
         startActivity(intent);
     }
     public void review(View view){
+
+    }
+    public int ItemColor(String color){
+        switch (color){
+            case "YELLOW":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_yellow);
+            case "PINK":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_pink);
+            case "GREEN":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_green);
+            case "BLUE":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_blue);
+            case "PURPLE":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_purple);
+            case "GRAY":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_gray);
+            default:
+                return ContextCompat.getColor(getApplicationContext(),R.color.white);
+        }
 
     }
 

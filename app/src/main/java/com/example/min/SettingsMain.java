@@ -10,10 +10,14 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -48,6 +52,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
     private TextView user_name;
     private TextView affiliation;
 
+    ImageView profile_image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
         affiliation = findViewById(R.id.affiliation);
         btn_logout_dialog = findViewById(R.id.logout);
         btn_withdrawal = findViewById(R.id.withdrawal);
+        profile_image = findViewById(R.id.profile_image);
+
+        try {
+            String imgpath = getCacheDir() + "/" + "osz.png";   // 내부 저장소에 저장되어 있는 이미지 경로
+            Bitmap bm = BitmapFactory.decodeFile(imgpath);
+            profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
+        } catch (Exception e) {
+        }
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
@@ -183,16 +197,4 @@ import com.google.firebase.firestore.FirebaseFirestore;
 //        startActivity(intent);
 //    }
 
-     public void hide_statistical_data(View view){
-        TableLayout table = findViewById(R.id.statistical_data);
-        View bar = findViewById(R.id.bar_under_statistical_data);
-        if(table.getVisibility() == view.GONE){
-            table.setVisibility(view.VISIBLE);
-            bar.setVisibility(view.VISIBLE);
-        }
-        else{
-            table.setVisibility(view.GONE);
-            bar.setVisibility(view.GONE);
-        }
-     }
 }
