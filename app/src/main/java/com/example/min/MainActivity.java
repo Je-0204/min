@@ -244,11 +244,8 @@ public class MainActivity extends ActivityGroup {
                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
-<<<<<<< HEAD
                     intent.putExtra("dicColor",itemColor.get(i));
-=======
                     intent.putExtra("voca", voca);
->>>>>>> 0ce2a78b620a80af260305919d277530c82671df
                     startActivity(intent);
                 }
             });
