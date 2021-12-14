@@ -13,8 +13,7 @@
         android:textStyle="bold"
         android:text="dicName"
         android:padding="50dp"
-        android:textAlignment="center"
-        android:background="@color/purple_200"></TextView>
+        android:textAlignment="center"></TextView>
     <LinearLayout
         android:layout_below="@id/name"
         android:layout_width="match_parent"

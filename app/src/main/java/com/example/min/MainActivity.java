@@ -90,6 +90,7 @@ public class MainActivity extends ActivityGroup {
     static ListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
+    static ArrayList<String> itemColor; //dic Color
 
     private ImageView profile_image;
     private final String imgName = "osz.png";
@@ -108,6 +109,7 @@ public class MainActivity extends ActivityGroup {
         listview = findViewById(R.id.listView1);
         items = new ArrayList<>();
         context=getApplicationContext();
+        itemColor=new ArrayList<String>();
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -241,6 +243,7 @@ public class MainActivity extends ActivityGroup {
                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
+                    intent.putExtra("dicColor",itemColor.get(i));
                     startActivity(intent);
                 }
             });
@@ -257,6 +260,7 @@ public class MainActivity extends ActivityGroup {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             items.remove(position);
+                            itemColor.remove(position);
                             listview.setAdapter(adapter);
                             dialog.dismiss();
                         }
@@ -287,31 +291,39 @@ public class MainActivity extends ActivityGroup {
     }
     public static void removeItem(int remove){
         items.remove(remove);
+        itemColor.remove(remove);
         listview.setAdapter(adapter);
     }
     public static void addItem(String item){
         items.add(item);
+        itemColor.add("white");
         listview.setAdapter(adapter);
     }
     public static void changeItemColor(int change,String color){
         switch (color){
             case "YELLOW":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_yellow));
+                itemColor.set(change,color);
                 break;
             case "PINK":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_pink));
+                itemColor.set(change,color);
                 break;
             case "GREEN":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_green));
+                itemColor.set(change,color);
                 break;
             case "BLUE":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_blue));
+                itemColor.set(change,color);
                 break;
             case "PURPLE":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_purple));
+                itemColor.set(change,color);
                 break;
             case "GRAY":
                 listview.getChildAt(change).setBackgroundColor(ContextCompat.getColor(context,R.color.pastel_gray));
+                itemColor.set(change,color);
                 break;
         }
 
