@@ -28,6 +28,7 @@ public class Notification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
+
         textView_first_notification_content=findViewById(R.id.text_first_news_content);
         textView_second_notification_content=findViewById(R.id.text_second_news_content);
 

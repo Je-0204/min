@@ -1,18 +1,16 @@
 //https://www.youtube.com/watch?v=plnLs6aST1M - 단어장 수정 dialog
 package com.example.min;
 
-import static android.service.controls.ControlsProviderService.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,15 +32,19 @@ public class ClickDictioinary extends AppCompatActivity {
     private static final String TAG = "DB";
     // 빈 데이터 리스트 생성.
     ArrayList<String> items;
+    ArrayList<String> items2;
     // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
     ArrayAdapter adapter;
+    ArrayAdapter adapter2;
     // listview 생성 및 adapter 지정.
     ListView listview;
+    ListView listview2;
     //단어 뜻 저장하는 리스트, 데이터리스트와 짝꿍
     ArrayList<String> itemMeanings;
+    ArrayList<String> itemMeanings2;
     public int voca;
-    int count;
-    private ArrayList<Question> questionList;
+    private ArrayList<Question> questionList0;
+    private ArrayList<Question> questionList1;
 
 
     @Override
@@ -52,12 +54,19 @@ public class ClickDictioinary extends AppCompatActivity {
 
         Intent intent=getIntent();
         String dicName = intent.getStringExtra("dicName");
+        String dicColor=intent.getStringExtra("dicColor");
         voca = intent.getIntExtra("voca", 0);
-        count = 0;
+
+        items = new ArrayList<String>();
+        itemMeanings = new ArrayList<String>();
+
+        items2 = new ArrayList<String>();
+        itemMeanings2 = new ArrayList<String>();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        questionList = new ArrayList<>();
+        questionList0 = new ArrayList<>();
+        questionList1 = new ArrayList<>();
 
         if(voca == 1) {
             DatabaseReference dbRef = db.getReference("CSAT");
@@ -65,19 +74,32 @@ public class ClickDictioinary extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        if(count >= 10)
-                            break;
-                        String question = dataSnapshot.getKey().toString();
+                        String question = dataSnapshot.getKey();
                         String option1 = dataSnapshot.child("option1").getValue().toString();
                         String option2 = dataSnapshot.child("option2").getValue().toString();
                         String option3 = dataSnapshot.child("option3").getValue().toString();
                         String option4 = dataSnapshot.child("option4").getValue().toString();
                         String answer_nr = dataSnapshot.child("answer_nr").getValue().toString();
                         Question vocab = new Question(question, option1, option2, option3, option4, Integer.parseInt(answer_nr));
-                        questionList.add(vocab);
-                        count++;
+                        if(dataSnapshot.child("is_memorized").getValue().toString().equals("0")) {
+                            items.add(dataSnapshot.getKey());
+                            itemMeanings.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList0.add(vocab);
+                        }
+                        else if(dataSnapshot.child("is_memorized").getValue().toString().equals("1")) {
+                            items2.add(dataSnapshot.getKey());
+                            itemMeanings2.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList1.add(vocab);
+                        }
                     }
                     Log.d(TAG, "Data load success");
+                    adapter = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items) ;
+                    adapter2 = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items2);
+                    // listview 생성 및 adapter 지정.
+                    listview = (ListView) findViewById(R.id.listview1);
+                    listview.setAdapter(adapter);
+                    listview2 = (ListView) findViewById(R.id.listview2);
+                    listview2.setAdapter(adapter2);
                 }
 
                 @Override
@@ -85,21 +107,71 @@ public class ClickDictioinary extends AppCompatActivity {
                     Log.w(TAG, "Data load failed");
                 }
             });
-            Collections.shuffle(questionList);
+            Collections.shuffle(questionList0);
+            Collections.shuffle(questionList1);
+        }
+
+        if(voca == 2) {
+            DatabaseReference dbRef = db.getReference("TOEIC");
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String question = dataSnapshot.getKey();
+                        String option1 = dataSnapshot.child("option1").getValue().toString();
+                        String option2 = dataSnapshot.child("option2").getValue().toString();
+                        String option3 = dataSnapshot.child("option3").getValue().toString();
+                        String option4 = dataSnapshot.child("option4").getValue().toString();
+                        String answer_nr = dataSnapshot.child("answer_nr").getValue().toString();
+                        Question vocab = new Question(question, option1, option2, option3, option4, Integer.parseInt(answer_nr));
+                        if(dataSnapshot.child("is_memorized").getValue().toString().equals("0")) {
+                            items.add(dataSnapshot.getKey());
+                            itemMeanings.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList0.add(vocab);
+                        }
+                        else if(dataSnapshot.child("is_memorized").getValue().toString().equals("1")) {
+                            items2.add(dataSnapshot.getKey());
+                            itemMeanings2.add(dataSnapshot.child("뜻").getValue().toString());
+                            questionList1.add(vocab);
+                        }
+                    }
+                    Log.d(TAG, "Data load success");
+                    adapter = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items) ;
+                    adapter2 = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items2);
+                    // listview 생성 및 adapter 지정.
+                    listview = (ListView) findViewById(R.id.listview1);
+                    listview.setAdapter(adapter);
+                    listview2 = (ListView) findViewById(R.id.listview2);
+                    listview2.setAdapter(adapter2);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.w(TAG, "Data load failed");
+                }
+            });
+            Collections.shuffle(questionList0);
+            Collections.shuffle(questionList1);
         }
 
         TextView textView=findViewById(R.id.name);
         textView.setText(dicName);
+        textView.setBackgroundColor(ItemColor(dicColor));//Integer.toString(value,16)
+
+        //Toast.makeText(ClickDictioinary.this,""+ItemColor(dicColor),Toast.LENGTH_SHORT).show();
 
         // 빈 데이터 리스트 생성.
         items = new ArrayList<String>() ;
         // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items) ;
-        // listview 생성 및 adapter 지정.
-        listview = (ListView) findViewById(R.id.listview1) ;
-        listview.setAdapter(adapter) ;
-        itemMeanings=new ArrayList<String>();
 
+        adapter = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items) ;
+        // listview 생성 및 adapter 지정.
+        listview = (ListView) findViewById(R.id.listview1);
+        listview.setAdapter(adapter);
+
+        adapter2 = new ArrayAdapter(ClickDictioinary.this, android.R.layout.simple_list_item_1, items2);
+        listview2 = (ListView) findViewById(R.id.listview2);
+        listview2.setAdapter(adapter2);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -197,10 +269,45 @@ public class ClickDictioinary extends AppCompatActivity {
         Intent intent = new Intent();
         ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
         intent.setComponent(componentName);
-        intent.putParcelableArrayListExtra("questionList", questionList);
+        intent.putParcelableArrayListExtra("questionList", questionList0);
+        intent.putExtra("voca", voca);
         startActivity(intent);
     }
     public void review(View view){
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
+        intent.setComponent(componentName);
+        intent.putParcelableArrayListExtra("questionList", questionList1);
+        intent.putExtra("voca", voca);
+        startActivity(intent);
+    }
+    public int ItemColor(String color){
+        switch (color){
+            case "YELLOW":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_yellow);
+            case "PINK":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_pink);
+            case "GREEN":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_green);
+            case "BLUE":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_blue);
+            case "PURPLE":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_purple);
+            case "GRAY":
+                return ContextCompat.getColor(getApplicationContext(),R.color.pastel_gray);
+            default:
+                return ContextCompat.getColor(getApplicationContext(),R.color.white);
+        }
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
 }

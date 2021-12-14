@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -58,6 +59,8 @@ public class MemorizeWords extends AppCompatActivity {
     private Question currentQuestion;
     private ArrayList<Question> questionList;
     private int answerNr;
+    public int count;
+    private int voca;
 
 
     private boolean answered;
@@ -66,15 +69,21 @@ public class MemorizeWords extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        count = 0;
         questionCounter = 0;
         currentQuestion = new Question();
 
         Intent intent = getIntent();
         questionList = intent.getParcelableArrayListExtra("questionList");
-        questionCountTotal = 10;
+
+        voca = intent.getIntExtra("voca", 0);
+        if(questionList.size() > 10){
+            questionCountTotal = 10;
+        }else {
+            questionCountTotal = questionList.size();
+        }
 
         setContentView(R.layout.activity_memorize_words);
-
 
         textViewQuestion = findViewById(R.id.textview_question);
         textViewQuestionCount = findViewById(R.id.progress_count);
@@ -146,7 +155,35 @@ public class MemorizeWords extends AppCompatActivity {
         rb3.setTextColor(Color.RED);
         rb4.setTextColor(Color.RED);
 
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
         if(currentQuestion.getAnswerNr() == answerNr) {
+            if(voca == 1) {
+                DatabaseReference dbRef = db.getReference("CSAT");
+                String Eng = currentQuestion.getQuestion();
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put(Eng + "/is_memorized", 1);
+                dbRef.updateChildren(map, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Log.d(TAG, "Data changed");
+                    }
+                });
+            }
+
+            if(voca == 2) {
+                DatabaseReference dbRef = db.getReference("TOEIC");
+                String Eng = currentQuestion.getQuestion();
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put(Eng + "/is_memorized", 1);
+                dbRef.updateChildren(map, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                        Log.d(TAG, "Data changed");
+                    }
+                });
+            }
+
             if(currentQuestion.getAnswerNr() == 1) {
                 rb1.setTextColor(Color.GREEN);
             }

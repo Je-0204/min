@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android-Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.14322916666666666" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_choose_dictionary.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_memorize_words.xml" value="0.2078804347826087" />
@@ -15,6 +16,8 @@
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/google_sign.xml" value="0.19882246376811594" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/loginscreen01.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/splash.xml" value="0.14270833333333333" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_choose_dictionary.xml" value="0.12310030395136778" />
+        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_click_dictioinary.xml" value="0.12310030395136778" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_memorize_words.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen01.xml" value="0.25364583333333335" />
