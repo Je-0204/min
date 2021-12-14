@@ -85,6 +85,7 @@ public class MainActivity extends ActivityGroup {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private TextView username;
+    private TextView affiliation;
 
     static ListView listview;
     static ListViewAdapter adapter;
@@ -116,16 +117,13 @@ public class MainActivity extends ActivityGroup {
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         profile_image = findViewById(R.id.profile_image);
+        affiliation = findViewById(R.id.affiliation);
 
         try {
             String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
-//            profile_image.setBackground(new ShapeDrawable(new OvalShape()));
-//            profile_image.setClipToOutline(true);
-            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -137,6 +135,7 @@ public class MainActivity extends ActivityGroup {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         username.setText(document.get("Name").toString());
+                        affiliation.setText(document.get("Affiliation").toString());
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -340,7 +339,6 @@ class ListViewAdapter extends ArrayAdapter<String> {
             convertView=layoutInflater.inflate(R.layout.listview_custom,null);
         }
         context=parent.getContext();
-        TextView date=convertView.findViewById(R.id.date);
 
         TextView name=convertView.findViewById(R.id.dicName);
         name.setText(list.get(position));
