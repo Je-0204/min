@@ -99,6 +99,7 @@ public class MainActivity extends ActivityGroup {
     public int TOEFL = 3;
     public int EleMid = 4;
     public int TEPS = 5;
+    public int voca = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,12 +206,12 @@ public class MainActivity extends ActivityGroup {
 
             }else if (resultCode==2) {  //min 수능 단어장 추가
                 text="min 수능 단어장";
-                MemorizeWords.set_vocabulary(CSAT);
+                voca = CSAT;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==3) {  //min 토익 단어장 추가
                 text="min 토익 단어장";
-                MemorizeWords.set_vocabulary(TOEIC);
+                voca = TOEIC;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==4) {  //공유된 단어장 추가
@@ -218,15 +219,15 @@ public class MainActivity extends ActivityGroup {
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==5) {  //토플 단어장 추가
                 text="min TOEFL 단어장";
-                MemorizeWords.set_vocabulary(TOEFL);
+                voca = TOEFL;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==6) {  //텝스 단어장 추가
                 text="min TEPS 단어장";
-                MemorizeWords.set_vocabulary(TEPS);
+                voca = TEPS;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==7) {  //텝스 단어장 추가
                 text="min 초/중 필수 단어장";
-                MemorizeWords.set_vocabulary(EleMid);
+                voca = EleMid;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==-1) {  //취소버튼(단어장추가안해)
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
@@ -242,6 +243,7 @@ public class MainActivity extends ActivityGroup {
                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
+                    intent.putExtra("voca", voca);
                     startActivity(intent);
                 }
             });

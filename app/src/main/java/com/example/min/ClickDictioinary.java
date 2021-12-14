@@ -1,6 +1,7 @@
 //https://www.youtube.com/watch?v=plnLs6aST1M - 단어장 수정 dialog
 package com.example.min;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +9,7 @@ import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class ClickDictioinary extends AppCompatActivity {
+    private static final String TAG = "DB";
     // 빈 데이터 리스트 생성.
     ArrayList<String> items;
     // ArrayAdapter 생성. 아이템 View를 선택(single choice)가능하도록 만듦.
@@ -28,6 +31,8 @@ public class ClickDictioinary extends AppCompatActivity {
     ListView listview;
     //단어 뜻 저장하는 리스트, 데이터리스트와 짝꿍
     ArrayList<String> itemMeanings;
+    public String voca;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,7 @@ public class ClickDictioinary extends AppCompatActivity {
 
         Intent intent=getIntent();
         String dicName = intent.getStringExtra("dicName");
+        voca = intent.getStringExtra("voca");
 
         TextView textView=findViewById(R.id.name);
         textView.setText(dicName);
@@ -47,6 +53,7 @@ public class ClickDictioinary extends AppCompatActivity {
         listview = (ListView) findViewById(R.id.listview1) ;
         listview.setAdapter(adapter) ;
         itemMeanings=new ArrayList<String>();
+
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -144,6 +151,7 @@ public class ClickDictioinary extends AppCompatActivity {
         Intent intent = new Intent();
         ComponentName componentName = new ComponentName("com.example.min","com.example.min.MemorizeWords");
         intent.setComponent(componentName);
+        intent.putExtra("voca", voca);
         startActivity(intent);
     }
     public void review(View view){
