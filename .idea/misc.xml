@@ -35,6 +35,7 @@
         <entry key="..\:/Users/wjdal/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/wjdal/AndroidStudioProjects/min/min/app/src/main/res/layout/loginscreen01.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/drawable/borderline.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/drawable/edge.xml" value="0.30625" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.25462962962962965" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml" value="0.3569230769230769" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.17916666666666667" />
@@ -45,7 +46,7 @@
         <entry key="app/src/main/res/layout/activity_click_dictioinary.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_setting_dictionary.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_settings_manage_push_notification.xml" value="0.33" />
