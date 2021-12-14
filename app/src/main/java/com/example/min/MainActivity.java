@@ -85,6 +85,7 @@ public class MainActivity extends ActivityGroup {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private TextView username;
+    private TextView affiliation;
 
     static ListView listview;
     static ListViewAdapter adapter;
@@ -100,6 +101,7 @@ public class MainActivity extends ActivityGroup {
     public int TOEFL = 3;
     public int EleMid = 4;
     public int TEPS = 5;
+    public int voca = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,16 +119,13 @@ public class MainActivity extends ActivityGroup {
         FirebaseUser firebaseUser = auth.getCurrentUser();
 
         profile_image = findViewById(R.id.profile_image);
+        affiliation = findViewById(R.id.affiliation);
 
         try {
             String imgpath = getCacheDir() + "/" + imgName;   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             profile_image.setImageBitmap(bm);   // 내부 저장소에 저장된 이미지를 이미지뷰에 셋
-//            profile_image.setBackground(new ShapeDrawable(new OvalShape()));
-//            profile_image.setClipToOutline(true);
-            Toast.makeText(getApplicationContext(), "파일 로드 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "파일 로드 실패", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -138,6 +137,7 @@ public class MainActivity extends ActivityGroup {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         username.setText(document.get("Name").toString());
+                        affiliation.setText(document.get("Affiliation").toString());
                     }
                     else {
                         Log.d(TAG, "No such document");
@@ -207,12 +207,12 @@ public class MainActivity extends ActivityGroup {
 
             }else if (resultCode==2) {  //min 수능 단어장 추가
                 text="min 수능 단어장";
-                MemorizeWords.set_vocabulary(CSAT);
+                voca = CSAT;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==3) {  //min 토익 단어장 추가
                 text="min 토익 단어장";
-                MemorizeWords.set_vocabulary(TOEIC);
+                voca = TOEIC;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }
             else if (resultCode==4) {  //공유된 단어장 추가
@@ -220,14 +220,15 @@ public class MainActivity extends ActivityGroup {
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==5) {  //토플 단어장 추가
                 text="min TOEFL 단어장";
-                MemorizeWords.set_vocabulary(TOEFL);
+                voca = TOEFL;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==6) {  //텝스 단어장 추가
                 text="min TEPS 단어장";
-                MemorizeWords.set_vocabulary(TEPS);
+                voca = TEPS;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==7) {  //텝스 단어장 추가
                 text="min 초/중 필수 단어장";
+                voca = EleMid;
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
             }else if (resultCode==-1) {  //취소버튼(단어장추가안해)
                 //Toast.makeText(MainActivity.this, Integer.toString(resultCode), Toast.LENGTH_LONG).show();
@@ -243,7 +244,11 @@ public class MainActivity extends ActivityGroup {
                     ComponentName componentName=new ComponentName("com.example.min","com.example.min.ClickDictioinary");
                     intent.setComponent(componentName);
                     intent.putExtra("dicName",name);
+<<<<<<< HEAD
                     intent.putExtra("dicColor",itemColor.get(i));
+=======
+                    intent.putExtra("voca", voca);
+>>>>>>> 0ce2a78b620a80af260305919d277530c82671df
                     startActivity(intent);
                 }
             });
@@ -349,7 +354,6 @@ class ListViewAdapter extends ArrayAdapter<String> {
             convertView=layoutInflater.inflate(R.layout.listview_custom,null);
         }
         context=parent.getContext();
-        TextView date=convertView.findViewById(R.id.date);
 
         TextView name=convertView.findViewById(R.id.dicName);
         name.setText(list.get(position));

@@ -14,8 +14,6 @@
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.264" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/google_sign.xml" value="0.19882246376811594" />
         <entry key="..\:/AndroidStudioProjects/min/app/src/main/res/layout/loginscreen01.xml" value="0.264" />
-        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.26979166666666665" />
-        <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.26979166666666665" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/drawable/splash.xml" value="0.14270833333333333" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_choose_dictionary.xml" value="0.12310030395136778" />
         <entry key="..\:/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_click_dictioinary.xml" value="0.12310030395136778" />
@@ -38,16 +36,20 @@
         <entry key="..\:/Users/wjdal/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen02.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/wjdal/AndroidStudioProjects/min/min/app/src/main/res/layout/activity_signupscreen03.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/wjdal/AndroidStudioProjects/min/min/app/src/main/res/layout/loginscreen01.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/drawable/borderline.xml" value="0.20572916666666666" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.25462962962962965" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml" value="0.3569230769230769" />
         <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/activity_choose_dictionary.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/activity_click_dictioinary.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_memorize_words.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.14739583333333334" />
-        <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_setting_dictionary.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/activity_settings_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_settings_manage_push_notification.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_settings_manage_shared_vocabulary.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/activity_settings_manage_themes.xml" value="0.17447916666666666" />
@@ -61,8 +63,9 @@
         <entry key="app/src/main/res/layout/custom_dialog_layout01.xml" value="0.13518518518518519" />
         <entry key="app/src/main/res/layout/custom_dialog_layout02.xml" value="0.13518518518518519" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.19791666666666666" />
-        <entry key="app/src/main/res/layout/listview_custom.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/layout/listview_custom.xml" value="0.33" />
         <entry key="app/src/main/res/layout/loginscreen01.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/notification_frame.xml" value="0.1" />
       </map>
     </option>
   </component>
